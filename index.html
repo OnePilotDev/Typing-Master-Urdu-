@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اردو ٹائپنگ ماسٹر</title>
+    <!-- Google Font for Nastaleeq -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Code Starts Here */
+
+        /* Basic Setup */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Nastaliq Urdu', 'Alvi Nastaleeq Regular', sans-serif;
+            background-color: #ffffff; /* Attractive White UI */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 15px;
+            direction: rtl; /* Right-to-Left for Urdu */
+        }
+
+        .container {
+            width: 95%;
+            max-width: 900px;
+            background-color: #fdfdfd;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Heading */
+        h1 {
+            color: #28a745; /* Green Color */
+            font-size: 3.0rem; /* As requested */
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Font size for the entire interface */
+        .container, input, select, button, label, textarea {
+            font-size: 2.0rem; /* A to Z interface font size */
+            font-family: 'Noto Nastaliq Urdu', 'Alvi Nastaleeq Regular', sans-serif;
+        }
+        /* Reduce font size for smaller elements for better balance */
+        .stats-bar, .mistake-highlight-area h3, .results-controls button {
+            font-size: 1.5rem;
+        }
+
+        /* Setup Screen */
+        #setup-screen .form-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        #setup-screen label {
+            font-weight: bold;
+            color: #555;
+        }
+        #setup-screen input, #setup-screen select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #setup-screen input:focus, #setup-screen select:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+        
+        /* Urdu Helper Message Style */
+        .input-wrapper {
+            position: relative;
+        }
+        #urdu-helper {
+            font-size: 1.2rem;
+            color: #888;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* <!-- نئی تبدیلی: ٹوگل سوئچ کے لیے اسٹائل --> */
+        .toggle-switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; 
+        }
+        .toggle-switch {
+            width: 70px;
+            height: 34px;
+            background-color: #ccc;
+            border-radius: 34px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .toggle-switch.active {
+            background-color: #28a745; /* فعال ہونے پر ہرا رنگ */
+        }
+        .toggle-switch.active .toggle-thumb {
+            transform: translateX(36px);
+        }
+
+
+        /* Buttons */
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #94dcb0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+
+        /* Typing Test Screen */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .stat {
+            font-weight: bold;
+        }
+
+        /* Modified paragraph display to show full text without scroll and fit 100% view */
+        #paragraph-display {
+            background-color: #f9f9f9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            line-height: 2.0; /* Adjusted for Nastaleeq line heights */
+            margin-bottom: 15px;
+            font-size: 1.8rem; /* Highly readable but avoids excessive overflow */
+            text-align: justify;
+        }
+
+        #paragraph-display span {
+            padding: 2px 0;
+        }
+
+        #paragraph-display .current {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+        }
+        #paragraph-display .correct {
+            color: #28a745;
+        }
+        #paragraph-display .incorrect {
+            color: #dc3545;
+            text-decoration: underline;
+            font-weight: bold;
+            background-color: #f8d7da;
+            border-radius: 4px;
+        }
+
+        /* Compacted height to avoid page scrolling at 100% resolution */
+        #typing-input {
+            width: 100%;
+            height: 110px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: none;
+        }
+        #typing-input:focus {
+            outline: none;
+            border-color: #28a745;
+        }
+
+        .mistake-highlight-area {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff0f1;
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+            min-height: 45px;
+        }
+        .mistake-highlight-area h3 {
+            margin-bottom: 10px;
+            color: #dc3545;
+        }
+        #mistake-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: #721c24;
+        }
+
+        /* Secondary actions styled buttons (Restart Button styling) */
+        #restart-btn, #restart-from-results-btn {
+            background: linear-gradient(45deg, #6c757d, #5a6268);
+        }
+        #restart-btn:hover, #restart-from-results-btn:hover {
+            background: linear-gradient(45deg, #5a6268, #4e555b);
+            transform: translateY(-2px);
+        }
+
+        /* Results Screen & Report Card */
+        #report-card {
+            background: #fff;
+            padding: 25px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .report-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .report-header p {
+            margin: 4px 0;
+            font-size: 1.5rem;
+            color: #555;
+        }
+        #report-date {
+            font-weight: bold;
+        }
+        
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            font-size: 1.8rem;
+        }
+        .grid-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .grid-item span:first-child {
+            font-weight: bold;
+            color: #495057;
+        }
+        .grid-item span:last-child {
+            color: #28a745;
+            font-weight: bold;
+        }
+        #wpm-grid-item {
+            grid-column: 1 / -1;
+            font-size: 2.2rem;
+        }
+        .chart-container {
+            margin-top: 25px;
+        }
+
+        #report-mistakes-container {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+         #report-mistakes-container h3 {
+            font-size: 1.8rem;
+            color: #dc3545;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        #report-mistake-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .mistake-grid-item {
+            background-color: #fff7f8;
+            border: 1px solid #f0b8be;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1.6rem;
+        }
+        .mistake-grid-item div {
+            margin-bottom: 8px;
+        }
+        .mistake-grid-item .correct-word-display span {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .mistake-grid-item .typed-word-display span {
+            color: #dc3545;
+            text-decoration: line-through;
+        }
+
+        .results-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .download-btn {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+        /* CSS Code Ends Here */
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>اردو ٹائپنگ ماسٹر</h1>
+
+        <!-- Setup Screen -->
+        <div id="setup-screen">
+            <div class="form-grid">
+                <label for="username">۱. نام درج کریں</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="یہاں اپنا نام لکھیں">
+                    <small id="urdu-helper" class="hidden">صرف اردو حروف کا استعمال کریں (Alt+Shift)</small>
+                </div>
+
+                <label for="roll-number">۲. رولنمبر درج کریں</label>
+                <div>
+                    <input type="text" id="roll-number" placeholder="صرف نمبر درج کریں" inputmode="numeric">
+                </div>
+
+                <label for="paragraph-select">۳. پیراگراف منتخب کریں</label>
+                <div>
+                    <select id="paragraph-select"></select>
+                </div>
+
+                <label for="time-select">۴. وقت منتخب کریں</label>
+                <div>
+                    <select id="time-select">
+                        <option value="60">1 منٹ</option>
+                        <option value="120">2 منٹ</option>
+                        <option value="180">3 منٹ</option>
+                        <option value="300">5 منٹ</option>
+                    </select>
+                </div>
+                
+                <!-- نئی تبدیلی: چیک باکس کی جگہ ٹوگل سوئچ -->
+                <label>۵. بیک اسپیس غیر فعال کریں</label>
+                <div class="toggle-switch-container">
+                    <div class="toggle-switch" id="backspace-toggle-btn" role="switch" aria-checked="false">
+                        <span class="toggle-thumb"></span>
+                    </div>
+                </div>
+
+            </div>
+            <button id="start-btn">ٹائپنگ شروع کریں</button>
+        </div>
+
+        <!-- Typing Test Screen (بغیر کسی تبدیلی کے) -->
+        <div id="typing-test-screen" class="hidden">
+            <div class="stats-bar">
+                <div class="stat">وقت: <span id="timer">0:00</span></div>
+                <div class="stat">WPM: <span id="wpm-live">0</span></div>
+                <div class="stat">غلطیاں: <span id="mistakes-live">0</span></div>
+            </div>
+            <div id="paragraph-display"></div>
+            <textarea id="typing-input" spellcheck="false" autofocus></textarea>
+            <div class="mistake-highlight-area">
+                <h3>غلط الفاظ:</h3>
+                <div id="mistake-list"></div>
+            </div>
+            <button id="restart-btn">دوبارہ شروع کریں</button>
+        </div>
+
+        <!-- Results Screen (بغیر کسی تبدیلی کے) -->
+        <div id="results-screen" class="hidden">
+            <h2>ٹائپنگ کا نتیجہ</h2>
+            <div id="report-card">
+                <div class="report-header">
+                    <p id="report-date"></p>
+                    <p id="report-time"></p>
+                </div>
+                <div class="report-grid">
+                    <div class="grid-item"><span>نام:</span> <span id="report-username"></span></div>
+                    <div class="grid-item"><span>رول نمبر:</span> <span id="report-roll-no"></span></div>
+                    <div class="grid-item"><span>کل الفاظ:</span> <span id="report-total-words"></span></div>
+                    <div class="grid-item"><span>درست الفاظ:</span> <span id="report-correct-words"></span></div>
+                    <div class="grid-item"><span>غلط الفاظ:</span> <span id="report-incorrect-words"></span></div>
+                    <div class="grid-item"><span>درستگی:</span> <span id="report-accuracy"></span></div>
+                    <div class="grid-item" id="wpm-grid-item"><span>WPM:</span> <span id="report-wpm"></span></div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="wpm-chart"></canvas>
+                </div>
+                <div id="report-mistakes-container" class="hidden">
+                    <h3>غلط الفاظ کی تفصیل</h3>
+                    <div id="report-mistake-list"></div>
+                </div>
+            </div>
+            <div class="results-controls">
+                <button id="download-with-mistakes-btn" class="download-btn">
+                    <span class="btn-text">غلطیوں کے ساتھ ڈاؤن لوڈ</span>
+                    <div class="spinner hidden"></div>
+                </button>
+                <button id="download-without-mistakes-btn" class="download-btn">
+                    <span class="btn-text">غلطیوں کے بغیر ڈاؤن لوڈ</span>
+                    <div class="spinner hidden"></div>
+                </button>
+                <button id="download-mistakes-only-btn" class="download-btn">
+                    <span class="btn-text">صرف غلطیاں ڈاؤن لوڈ کریں</span>
+                    <div class="spinner hidden"></div>
+                </button>
+                 <button id="restart-from-results-btn">دوبارہ شروع کریں</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const setupScreen = document.getElementById('setup-screen');
+            const typingTestScreen = document.getElementById('typing-test-screen');
+            const resultsScreen = document.getElementById('results-screen');
+            
+            const usernameInput = document.getElementById('username');
+            const urduHelper = document.getElementById('urdu-helper');
+            const rollNumberInput = document.getElementById('roll-number');
+            const paragraphSelect = document.getElementById('paragraph-select');
+            const timeSelect = document.getElementById('time-select');
+            const backspaceToggleBtn = document.getElementById('backspace-toggle-btn'); // <!-- نئی تبدیلی -->
+            const startBtn = document.getElementById('start-btn');
+
+            const timerDisplay = document.getElementById('timer');
+            const wpmLiveDisplay = document.getElementById('wpm-live');
+            const mistakesLiveDisplay = document.getElementById('mistakes-live');
+            const paragraphDisplay = document.getElementById('paragraph-display');
+            const typingInput = document.getElementById('typing-input');
+            const mistakeList = document.getElementById('mistake-list');
+            const restartBtn = document.getElementById('restart-btn');
+            const restartFromResultsBtn = document.getElementById('restart-from-results-btn');
+
+            const reportCard = document.getElementById('report-card');
+            const reportHeader = document.querySelector('.report-header');
+            const reportGrid = document.querySelector('.report-grid');
+            const chartContainer = document.querySelector('.chart-container');
+            const reportDate = document.getElementById('report-date');
+            const reportTime = document.getElementById('report-time');
+            const reportUsername = document.getElementById('report-username');
+            const reportRollNo = document.getElementById('report-roll-no');
+            const reportTotalWords = document.getElementById('report-total-words');
+            const reportCorrectWords = document.getElementById('report-correct-words');
+            const reportIncorrectWords = document.getElementById('report-incorrect-words');
+            const reportAccuracy = document.getElementById('report-accuracy');
+            const reportWPM = document.getElementById('report-wpm');
+            const reportMistakesContainer = document.getElementById('report-mistakes-container');
+            const reportMistakeList = document.getElementById('report-mistake-list');
+            
+            const downloadWithMistakesBtn = document.getElementById('download-with-mistakes-btn');
+            const downloadWithoutMistakesBtn = document.getElementById('download-without-mistakes-btn');
+            const downloadMistakesOnlyBtn = document.getElementById('download-mistakes-only-btn');
+            
+            const paragraphs = [
+             { 
+  
+  title: "ماں کی محبت", 
+  text: "ماں ایک ایسی نعمت ہے جو کبھی ختم نہیں ہوتی۔ وہ خود بھوکی رہ کر اولاد کو کھلاتی ہے۔ جب بچہ بیمار ہوتا ہے تو ماں رات بھر جاگتی ہے۔ اُس کی دعا میں وہ طاقت ہے جو تقدیر بدل سکتی ہے۔ ایک بار ایک لڑکے نے کہا، میری ماں بوڑھی ہو گئی ہے۔ اُس نے ماںؒ کے پاؤں دبائے اور سکون پایا۔ ماں نے کہا، بیٹا! یہی میرا انعام ہے۔ اللہ نے فرمایا کہ ماں کے قدموں تلے جنت ہے۔ سبق: ماں کی خدمت میں ہی دنیا و آخرت کی کامیابی ہے۔"
+},
+{ 
+  title: "رزقِ حلال", 
+  text: "ایک دکاندار روز اپنی دکان پر بسم اللہ پڑھ کر بیٹھتا تھا۔ وہ ہمیشہ سچ بولتا اور ناپ تول میں ایمانداری رکھتا۔ لوگ اُس سے خوش تھے۔ ایک دن ایک گاہک نے دھوکہ دینے کی کوشش کی، مگر دکاندار نے برداشت سے کام لیا۔ شام کو اُس کا نفع دوگنا ہو گیا۔ اُس نے کہا، رزق حلال میں برکت ہے۔ رزق حرام وقتی سکون دیتا ہے مگر آخرت برباد کرتا ہے۔ اللہ نے وعدہ کیا ہے کہ جو حلال کمائے گا، اُس کو کبھی محروم نہیں کرے گا۔ سبق: حلال کمائی میں ہی سکون و برکت ہے۔"
+},
+{ 
+  title: "نیکی کا بدلہ", 
+  text: "ایک شخص راستے میں زخمی ملا۔ ایک راہگیر نے اُسے پانی پلایا اور اسپتال پہنچایا۔ چند دن بعد وہی راہگیر بیمار پڑ گیا۔ اتفاق سے وہی زخمی شخص ڈاکٹر نکلا۔ اُس نے کہا، تم نے مجھے بچایا تھا، اب میں تمہارا علاج مفت کروں گا۔ دونوں مسکرانے لگے۔ سب نے کہا: نیکی کبھی ضائع نہیں جاتی۔ اللہ ہر نیک عمل کا بدلہ دیتا ہے۔ سبق: جو دوسروں کے لیے بھلائی کرتا ہے، اللہ اُس کے لیے آسانیاں پیدا کرتا ہے۔"
+},
+{ 
+  title: "غرور کا انجام", 
+  text: "ایک امیر شخص اپنے محل میں رہتا تھا۔ وہ غریبوں کو حقیر سمجھتا تھا۔ ایک دن آسمانی آفت آئی اور سب کچھ ختم ہو گیا۔ وہ سڑک پر آگیا۔ اب اُسے وہی غریب کھانا دے رہے تھے۔ اُس نے روتے ہوئے کہا، میں نے غرور کیا اور سب کھو دیا۔ اللہ نے فرمایا: غرور کرنے والے کو میں پسند نہیں کرتا۔ اُس دن سے اُس نے عاجزی اختیار کی۔ سبق: غرور انسان کو گراتا ہے، عاجزی بلند کرتی ہے۔"
+},
+{ 
+  title: "نماز کی طاقت", 
+  text: "ایک لڑکا ہر مشکل میں نماز پڑھتا تھا۔ لوگ اُس کا مذاق اُڑاتے۔ ایک دن اُس کا امتحان آیا۔ اُس نے اللہ سے مدد مانگی۔ اللہ نے اُسے کامیابی دی۔ سب حیران تھے کہ یہ کیسے ممکن ہوا۔ اُس نے کہا، یہ سب میری نماز کا اثر ہے۔ نماز انسان کو گناہوں سے روکتی ہے۔ یہ روح کی غذا ہے۔ سبق: نماز انسان کو اللہ کے قریب اور شیطان سے دور کرتی ہے۔"
+},
+{ 
+  title: "قرآن کی روشنی", 
+  text: "ایک نوجوان بہت پریشان رہتا تھا۔ ایک بزرگؒ نے کہا، روز قرآن پڑھا کرو۔ اُس نے روز تلاوت شروع کی۔ چند دنوں میں اُس کا دل سکون سے بھر گیا۔ اُس نے کہا، قرآن دلوں کی روشنی ہے۔ جو اسے چھوڑ دیتا ہے وہ اندھیروں میں بھٹکتا ہے۔ قرآن نے انسان کو انسانیت سکھائی۔ سبق: قرآن سے تعلق مضبوط رکھو، یہی کامیابی کا راستہ ہے۔"
+},
+{ 
+  title: "ایثار و قربانی", 
+  text: "ایک فقیر کے پاس صرف ایک روٹی تھی۔ راستے میں ایک بھوکا ملا، اُس نے روٹی اُسے دے دی۔ اُس رات خواب میں اُسے جنت دکھائی گئی۔ اللہ نے فرمایا: تم نے میری مخلوق کے لیے قربانی دی، میں تمہیں عزت دوں گا۔ فقیر خوش ہو گیا۔ لوگ اُس کی مثال دینے لگے۔ سبق: جو دوسروں کے لیے قربانی دیتا ہے، اللہ اُس کے لیے برکت کے دروازے کھول دیتا ہے۔"
+},
+{ 
+  title: "دعا کی قبولیت", 
+  text: "ایک بچی ہر رات سونے سے پہلے دعا مانگتی کہ میرے ابو کا قرض اتر جائے۔ کچھ دنوں بعد اُس کے ابو کو اچانک ایک پرانی رقم واپس ملی۔ ابو نے حیرت سے پوچھا، یہ کیسے ہوا؟ بچی بولی، میں روز دعا کرتی تھی۔ سب کے دل بھر آئے۔ ابو نے کہا، بیٹی! تمہاری دعا نے ہماری تقدیر بدل دی۔ سبق: سچی دعا کبھی رد نہیں ہوتی، اللہ وقت پر قبول کرتا ہے۔"
+},
+
+               
+              { 
+  title: "صفائی کی اہمیت", 
+  text: "صفائی نصف ایمان ہے۔ صاف ماحول صحت مند زندگی کے لیے ضروری ہے۔ گندگی بیماریوں کو جنم دیتی ہے۔ ہمیں اپنے گھر اور اردگرد کے ماحول کو صاف رکھنا چاہیے۔ اسلام نے भी صفائی پر زور دیا ہے۔ صاف ستھرا انسان سب کو پسند آتا ہے۔ صفائی سے انسان کی شخصیت نکھرتی ہے۔ صاف لباس اور صاف دل دونوں ضروری ہیں۔ اسکول، گلی اور محلہ سب صاف رہنے چاہییں۔ ہمیں ہمیشہ صفائی کو اپنی عادت بنانا چاہیے۔"
+},
+              
+  { 
+  title: "ماں کی محبت", 
+  text: "ماں کی محبت دنیا کی سب سے پاک محبت ہے۔ ماں اپنے بچوں کے لیے قربانیاں دیتی ہے۔ وہ خود بھوکی رہ کر اپنے بچوں کو کھلاتی ہے۔ ماں کی دعا اولاد کے لیے رحمت بن جاتی ہے۔ ماں کے قدموں تلے جنت ہے۔ ماں کی مسکراہٹ سے گھر میں سکون آتا ہے۔ ماں ہمیشہ اپنے بچوں کی بھلائی چاہتی ہے۔ ماں کا دل محبت اور قربانی سے بھرا ہوتا ہے۔ ہمیں ہمیشہ ماں کی خدمت کرنی چاہیے۔ کیونکہ ماں کے بغیر زندگی ادھوری ہے۔"
+},            
+              
+    { 
+  title: "سچ بولنے کی عادت", 
+  text: "سچ بولنا انسان کی سب سے بڑی خوبی ہے۔ سچائی سے انسان کا دل مطمئن رہتا ہے۔ جھوٹ بولنے والا ہمیشہ ڈر میں رہتا ہے۔ سچ بولنے سے انسان کو عزت ملتی ہے۔ ایک بار ایک لڑکے نے امتحان میں سچ بتایا کہ وہ تیاری نہیں کر سکا۔ استاد نے اس کی ایمانداری پر اسے سراہا۔ سب نے اس سے سبق سیکھا کہ سچ ہمیشہ فائدہ دیتا ہے۔ سچ انسان کو نیک بناتا ہے۔ جھوٹ وقتی سکون دیتا ہے مگر آخر میں نقصان۔ سبق: ہمیشہ سچ بولنا چاہیے، چاہے نقصان ہی کیوں نہ ہو۔"
+},
+{ 
+  title: "لالچی کسان", 
+  text: "ایک کسان کے پاس سونے کے انڈے دینے والی مرغی تھی۔ وہ روز ایک انڈہ دیتی تھی۔ کسان جلد امیر ہونا چاہتا تھا۔ اس نے سوچا کہ سب انڈے ایک ساتھ نکال لوں۔ اس نے مرغی کو مار دیا۔ مگر اندر کوئی انڈے نہ ملے۔ اب اس کے پاس نہ مرغی رہی نہ انڈے۔ وہ بہت پچھتایا۔ لالچ نے اس کی زندگی برباد کر دی۔ سبق: لالچ بری بلا ہے، ہمیشہ نقصان پہنچاتی ہے۔"
+},
+{ 
+  title: "ایماندار لکڑہارا", 
+  text: "ایک لکڑہارا دریا کے کنارے لکڑیاں کاٹ رہا تھا۔ اچانک اس کی کلہاڑی دریا میں گر گئی۔ وہ بہت پریشان ہوا۔ ایک فرشتہ آیا اور اس سے پوچھا کیا ہوا۔ لکڑہارے نے سچ بتایا کہ کلہاڑی گر گئی ہے۔ فرشتے نے سونے کی کلہاڑی نکالی مگر اس نے کہا یہ میری نہیں۔ پھر چاندی کی کلہاڑی دکھائی، تب بھی انکار کیا۔ آخر میں لوہے کی کلہاڑی نکلی، وہ بول اٹھا یہ میری ہے۔ فرشتہ خوش ہوا اور تینوں کلہاڑیاں دے دی۔ سبق: ایمانداری ہمیشہ انعام دلاتی ہے۔"
+},
+{ 
+  title: "دو دوست اور ریچھ", 
+  text: "دو دوست جنگل میں جا رہے تھے۔ اچانک ایک ریچھ آگیا۔ ایک دوست درخت پر چڑھ گیا۔ دوسرا زمین پر لیٹ گیا اور سانس روک لی۔ ریچھ آیا، سونگھا اور چلا گیا۔ درخت والا نیچے آیا اور پوچھا، ریچھ نے کیا کہا؟ دوسرے نے کہا، اس نے کہا کہ ایسے دوست پر بھروسہ مت کرو جو مصیبت میں چھوڑ دے۔ دونوں کو شرمندگی ہوئی۔ سبق: سچا دوست وہی ہے جو مشکل وقت میں ساتھ دے۔"
+},
+{ 
+  title: "محنتی طالبعلم", 
+  text: "ایک طالبعلم بہت سست تھا۔ ہمیشہ کھیل میں وقت ضائع کرتا تھا۔ امتحان قریب آیا تو اس نے محنت شروع کی۔ دن رات پڑھتا رہا۔ آخرکار امتحان میں کامیاب ہوا۔ اس کے والدین بہت خوش ہوئے۔ دوستوں نے بھی اس کی تعریف کی۔ اس نے سیکھا کہ محنت کا پھل ہمیشہ میٹھا ہوتا ہے۔ اب وہ کبھی وقت ضائع نہیں کرتا۔ سبق: محنت ہی کامیابی کی کنجی ہے، بغیر محنت کچھ حاصل نہیں ہوتا۔"
+},
+          
+    { 
+  title: "خوش اخلاق لڑکا", 
+  text: "احمد ہمیشہ سب سے نرمی سے بات کرتا تھا۔ وہ بڑوں کا ادب کرتا اور چھوٹوں سے پیار۔ ایک دن اسکول میں ایک بچہ گر گیا تو احمد نے فوراً اٹھایا۔ سب نے اس کی تعریف کی۔ استاد نے کہا، اچھا اخلاق سب سے بڑی دولت ہے۔ احمد کو انعام بھی ملا۔ وہ اور زیادہ نرمی سے پیش آنے لگا۔ سب اس کے دوست بن گئے۔ سبق: اچھا اخلاق انسان کو سب کے دل میں جگہ دیتا ہے۔"
+},
+{ 
+  title: "ضمیر دار دکاندار", 
+  text: "ایک دکاندار کے پاس ایک گاہک آیا۔ غلطی سے گاہک زیادہ پیسے دے گیا۔ دکاندار نے فوراً واپس کیے۔ گاہک بہت خوش ہوا۔ اس نے کہا تم بہت ایماندار ہو۔ دکاندار نے کہا یہ میرا فرض تھا۔ اس کی نیکی مشہور ہو گئی۔ اب سب لوگ اس کی دکان سے چیزیں لینے لگے۔ اس کا کاروبار بڑھ گیا۔ سبق: ایمانداری سے ہمیشہ برکت ہوتی ہے۔"
+},
+{ 
+  title: "بہادر لڑکی", 
+  text: "عائشہ گاؤں میں رہتی تھی۔ ایک دن اسکول سے واپس آتے ہوئے اس نے دیکھا کہ ایک بچہ کنویں میں گر گیا ہے۔ سب ڈر گئے مگر عائشہ نے ہمت نہیں ہاری۔ اس نے رسی باندھ کر بچے کو نکالا۔ سب نے تالیاں بجائیں۔ اس کے والدین فخر سے بھر گئے۔ حکومت نے اسے انعام دیا۔ سبق: بہادری انسان کو عزت دلاتی ہے، ڈر کو شکست دینا ہی اصل جیت ہے۔"
+},
+{ 
+  title: "غرور کا انجام", 
+  text: "ایک امیر شخص اپنے نوکر پر غرور کرتا تھا۔ وہ سب کو کمتر سمجھتا تھا۔ ایک دن اس کی دولت چوری ہو گئی۔ اب اس کے پاس کچھ نہ بچا۔ نوکر نے اس کی مدد کی۔ اسے احساس ہوا کہ غرور بیکار ہے۔ اس نے سب سے معافی مانگی۔ اب وہ عاجزی سے رہنے لگا۔ سبق: غرور ہمیشہ نقصان دیتا ہے، عاجزی انسان کو بلند کرتی ہے۔"
+},
+{ 
+  title: "نیک ماں کی دعا", 
+  text: "ایک غریب عورت کا بیٹے محنت کرتا تھا۔ وہ روز ماں کی دعا لیتا تھا۔ امتحان کے دن بھی اس نے دعا لی۔ نتیجے میں وہ اول آیا۔ ماں خوشی سے رو پڑی۔ اس نے کہا میری دعا نے کام کر دکھایا۔ بیٹے نے کہا، ماں کی دعا سب سے بڑا خزانہ ہے۔ اب وہ ہر کام سے پہلے ماں کی دعا لیتا ہے۔ سبق: ماں کی دعا سے ناممکن بھی ممکن ہو جاتا ہے۔"
+},
+{ 
+  title: "لالچی تاجر", 
+  text: "ایک تاجر کم تول کر چیزیں بیچتا تھا۔ لوگ دھوکہ کھاتے رہے۔ ایک دن اس کا ترازو ٹوٹ گیا۔ سب کو معلوم ہو گیا کہ وہ دھوکہ دیتا ہے۔ لوگوں نے خریدنا بند کر دیا۔ وہ افسوس کرنے لگا۔ اب اس نے سچائی سے کام کرنا شروع کیا۔ آہستہ آہستہ لوگ واپس آنے لگے۔ سبق: لالچ انسان کو برباد کر دیتا ہے، سچائی سے عزت ملتی ہے۔"
+},
+{ 
+  title: "جانوروں کی دوستی", 
+  text: "ایک جنگل میں خرگوش اور ہرن دوست تھے۔ ایک دن شکاری آیا۔ ہرن پکڑا گیا۔ خرگوش نے جال کاٹ دیا۔ ہرن بھاگ نکلا۔ دونوں خوش ہوئے۔ اب وہ ایک دوسرے کا زیادہ خیال رکھنے لگے۔ شکاری حیران رہ گیا۔ سبق: دوستی میں وفا ہو تو مشکل آسان بن جاتی ہے۔"
+},
+{ 
+  title: "محبت کرنے والا استاد", 
+  text: "ایک اسکول میں استاد بچوں کو پیار سے پڑھاتا تھا۔ وہ کبھی ڈانٹتا نہیں تھا۔ سب بچے اس سے محبت کرتے تھے۔ ایک دن اس نے ایک غریب بچے کی فیس خود ادا کی۔ بچہ کامیاب ہوا اور ڈاکٹر بن گیا۔ اس نے کہا میرا استاد میرا ہیرو ہے۔ سبق: محبت اور نیکی سے انسان دلوں میں زندہ رہتا ہے۔"
+},
+{ 
+  title: "حسد کا نقصان", 
+  text: "ایک لڑکا اپنے دوست سے حسد کرتا تھا۔ جب دوست کامیاب ہوتا تو وہ جلتا تھا۔ ایک دن اس کی حسد کی وجہ سے وہ خود ناکام ہو گیا۔ اسے احساس ہوا کہ حسد آگ ہے جو خود کو جلاتی ہے۔ اب وہ سب کی کامیابی پر خوش ہوتا ہے۔ اس کی زندگی بدل گئی۔ سبق: حسد انسان کی خوشیاں چھین لیتا ہے۔"
+},
+{ 
+  title: "امانت میں خیانت", 
+  text: "ایک شخص کے پاس دوست نے پیسے امانت رکھوائے۔ اس نے کچھ پیسے اپنے کام میں لگا دیے۔ بعد میں واپس نہیں کر سکا۔ اس کی عزت چلی گئی۔ سب نے اس پر اعتماد ختم کر دیا۔ وہ رو پڑا اور توبہ کی۔ اب وہ کبھی امانت میں خیانت نہیں کرتا۔ سبق: امانت داری ایمان کی نشانی ہے۔"
+},
+{ 
+  title: "غریب مگر عزت دار", 
+  text: "ایک غریب مزدور تھا مگر ہمیشہ عزت سے جیتا تھا۔ وہ کسی سے بھیک نہیں مانگتا تھا۔ دن رات محنت کرتا۔ لوگ اس کی عزت کرتے تھے۔ ایک دن ایک امیر آدمی نے اسے نوکری دی۔ اب وہ خوشحال ہو گیا۔ مگر اس نے غرور نہیں کیا۔ سبق: عزت محنت سے ملتی ہے، دولت سے نہیں۔"
+},
+{ 
+  title: "جھوٹا چرواہا", 
+  text: "ایک چرواہا روز جھوٹ بولتا کہ شیر آگیا ہے۔ گاؤں والے بھاگ کر آتے مگر شیر نہیں ہوتا۔ ایک دن سچ میں شیر آگیا۔ اس نے مدد کے لیے پکارا مگر کوئی نہ آیا۔ شیر نے بھیڑوں کو کھا لیا۔ وہ رونے لگا۔ سبق: جھوٹ بولنے والا سچ بول کر بھی یقین نہیں دلا سکتا۔"
+},
+{ 
+  title: "نرمی کا اثر", 
+  text: "ایک دن علی کا دوست اس پر ناراض ہو گیا۔ علی نے بدلہ نہیں لیا، بلکہ نرمی سے بات کی۔ دوست شرمندہ ہو گیا۔ اس نے معافی مانگی۔ علی نے کہا، سختی نہیں نرمی دل جیتتی ہے۔ اب وہ دونوں بہترین دوست ہیں- سبق: نرمی میں وہ طاقت ہے جو سختی میں نہیں۔"
+},
+{ 
+  title: "کوشش کرنے والا", 
+  text: "احمد ہر امتحان میں ناکام ہوتا تھا۔ مگر اس نے ہمت نہیں ہاری۔ وہ روز تھوڑا تھوڑا پڑھتا رہا۔ اگلے سال وہ پاس ہو گیا۔ سب نے حیرانی سے دیکھا۔ استاد نے کہا، کوشش کبھی ضائع نہیں جاتی۔ سبق: جو ہمت نہیں ہارتا، کامیابی آخرکار اسی کی ہوتی ہے۔"
+},
+{ 
+  title: "شکریہ کہنا", 
+  text: "علی ہمیشہ شکریہ کہتا تھا۔ چاہے کوئی چھوٹی سی مدد کرے۔ ایک دن اس کے شکریے کی وجہ سے ایک اجنبی نے اس کی مدد کی۔ وہ خوش ہو گیا۔ استاد نے کہا، شکر ادا کرنا انسانیت ہے۔ اب وہ ہر حال میں شکر گزار رہتا ہے۔ سبق: شکرگزاری خوشی کو بڑھاتی ہے۔"
+},
+{ 
+  title: "جان بچانے والا پرندہ", 
+  text: "ایک شکاری جال لگا کر گیا۔ ایک چھوٹے پرندے نے دیکھا کہ دوسرے پھنسنے والے ہیں۔ اس نے آواز لگائی اور سب کو بچا لیا۔ شکاری آیا تو جال خالی تھا۔ وہ حیران رہ گیا۔ سبق: دوسروں کی مدد کرنا سب سے بڑی نیکی ہے۔"
+},
+{ 
+  title: "پڑوسی کا حق", 
+  text: "ایک آدمی کے پڑوسی بیمار تھے۔ اس نے ان کی دوا اور کھانا دیا۔ چند دن بعد وہ صحت یاب ہو گئے۔ سب نے اس کی تعریف کی۔ وہ کہتا تھا، اچھا پڑوسی اللہ کی رحمت ہوتا ہے۔ سبق: پڑوسی کے حقوق ادا کرنا ایمان کی علامت ہے۔"
+},
+{ 
+  title: "غریب بچے کا خواب", 
+  text: "ایک غریب بچہ ڈاکٹر بننا چاہتا تھا۔ وہ دن میں کام کرتا اور رات کو پڑھتا۔ لوگوں نے مذاق اڑایا مگر وہ ڈٹا رہا۔ کئی سال بعد وہ کامیاب ڈاکٹر بن گیا۔ سب نے تالیاں بجائیں۔ سبق: خواب وہی پورے ہوتے ہیں جنہیں محنت سے سجایا جائے۔"
+},
+{ 
+  title: "جھگڑا ختم کرنے والا", 
+  text: "دو دوستوں میں لڑائی ہو گئی۔ بلال نے آگے بڑھ کر صلح کر لی۔ دوسرے نے بھی ہاتھ ملا لیا۔ سب حیران تھے کہ اس نے پہلے کیوں معافی مانگی۔ بلال نے کہا، جھگڑا ختم کرنے والا بڑا ہوتا ہے۔ سبق: صلح میں عزت ہے، ضد میں نقصان۔"
+},
+{ 
+  title: "سفر کا سبق", 
+  text: "علی اور اس کے والد پہاڑوں پر گئے۔ علی چلتے ہوئے گرا اور بولا آہ! پہاڑ سے آواز آئی آہ! باپ نے کہا، بیٹا یہ گونج ہے، زندگی بھی ایسی ہے۔ جو دو گے وہی واپس ملے گا۔ علی نے کہا میں تم سے محبت کرتا ہوں، پہاڑ نے بھی یہی کہا۔ سبق: زندگی میں اچھا بولیں، اچھا ہی لوٹ کر آئے گا۔"
+},
+  { 
+  title: "بھولا ہوا احسان", 
+  text: "ایک دن علی نے ایک بوڑھے شخص کی مدد کی۔ کئی سال بعد علی مشکل میں پھنس گیا۔ وہی بوڑھا اب امیر بن چکا تھا۔ اس نے علی کو پہچان لیا اور مدد کی۔ علی حیران رہ گیا۔ اس نے کہا، نیکی کبھی ضائع نہیں جاتی۔ بوڑھا مسکرا کر بولا، یاد رکھو، ہر احسان لوٹ کر آتا ہے۔ سبق: کسی پر کیا گیا احسان کبھی رائیگاں نہیں جاتا۔"
+},
+{ 
+  title: "دوستی کا امتحان", 
+  text: "ریحان اور فہد گہرے دوست تھے۔ ایک دن فہد بیمار ہوا۔ سب دوست چھوڑ گئے مگر ریحان روز اس کے پاس آتا رہا۔ اس نے دوا اور کھانا پہنچایا۔ فہد صحت یاب ہوا تو آنسوؤں سے ریحان کا شکریہ ادا کیا۔ ریحان نے کہا، سچا دوست وہی ہے جو مصیبت میں ساتھ دے۔ سبق: دوستی کا اصل مطلب ساتھ نبھانا ہے، صرف خوشی بانٹنا نہیں۔"
+},
+{ 
+  title: "غرور کا ٹوٹنا", 
+  text: "ایک شہزادہ اپنی دولت پر غرور کرتا تھا۔ وہ غریبوں کو حقیر سمجھتا۔ ایک دن شکاریوں نے اسے جنگل میں اکیلا چھوڑ دیا۔ بھوک سے نڈھال ہو گیا۔ ایک غریب چرواہے نے اسے روٹی دی۔ شہزادہ شرمندہ ہوا۔ اس دن سے اس نے غرور چھوڑ دیا۔ سبق: غرور انسان کو نیچا کر دیتا ہے، عاجزی انسان کو اونچا۔"
+},
+{ 
+  title: "جھوٹی چالاکی", 
+  text: "ایک چالاک لڑکے نے امتحان میں نقل کی۔ وہ پاس تو ہو گیا مگر کچھ سیکھ نہ سکا۔ اگلے سال فیل ہو گیا۔ سب نے کہا، چالاکی وقتی فائدہ دیتی ہے۔ اسے احساس ہوا کہ ایمانداری ہی اصل کامیابی ہے۔ اس نے محنت شروع کی اور شاندار کامیابی حاصل کی۔ سبق: جھوٹ اور دھوکہ وقتی سکون دیتے ہیں، مستقل کامیابی نہیں۔"
+},
+{ 
+  title: "چھوٹا عمل، بڑا اثر", 
+  text: "ایک بچی نے سڑک پر پھینکا ہوا پتھر ہٹا دیا تاکہ کوئی گرے نہیں۔ اگلے دن اسکول کے پرنسپل وہاں گزرے اور خوش ہوئے۔ انھوں نے بچی کو انعام دیا۔ بچی حیران تھی کہ ایک چھوٹے کام کا اتنا انعام ملا۔ سبق: چھوٹا سا نیک عمل بھی بڑا اثر رکھتا ہے۔"
+},
+{ 
+  title: "پانی کا سبق", 
+  text: "ایک دریا نے سمندر سے پوچھا، تم اتنا عظیم کیسے بنے؟ سمندر نے کہا، میں ہر ندی اور چشمے کو قبول کرتا ہوں۔ دریا نے سمجھ لیا، بڑائی دینے میں ہے، لینے میں نہیں۔ سبق: عاجزی سے انسان کی قدر بڑھتی ہے، تکبر سے نہیں۔"
+},
+{ 
+  title: "کمِی کا احساس", 
+  text: "ایک امیر بچہ ہر چیز رکھتا تھا مگر خوش نہیں تھا۔ ایک دن وہ ایک غریب بچے سے ملا جو بغیر جوتوں کے کھیل رہا تھا۔ مگر وہ بہت خوش تھا۔ امیر بچے نے پوچھا تم خوش کیسے ہو؟ اس نے کہا، شکر کرنے سے دل خوش رہتا ہے۔ سبق: خوشی چیزوں میں نہیں، شکرگزاری میں ہے۔"
+},
+{ 
+  title: "محبت کا انعام", 
+  text: "ایک نرس روز ایک بوڑھے مریض کی خدمت کرتی تھی۔ وہ کبھی شکایت نہ کرتی۔ مریض صحت یاب ہو گیا۔ چند دن بعد نرس کو پتا چلا کہ مریض نے اپنی جائیداد اس کے نام کر دی۔ وہ رو پڑی۔ سبق: خلوص سے کی گئی خدمت ہمیشہ انعام پاتی ہے۔"
+},
+{ 
+  title: "جلدی کا نقصان", 
+  text: "ایک لڑکے نے درخت پر لگے کچے آم توڑ لیے۔ وہ کھٹے نکلے۔ ماں نے کہا، صبر کرو تو میٹھے پھل ملتے ہیں۔ لڑکے کو سبق ملا کہ جلد بازی ہمیشہ نقصان دیتی ہے۔ اب وہ ہر کام سوچ سمجھ کر کرتا ہے۔ سبق: صبر کامیابی کی پہلی شرط ہے۔"
+},
+{ 
+  title: "بچوں کا تحفہ", 
+  text: "ایک اسکول میں بچوں نے استاد کے لیے چھوٹا سا کارڈ بنایا۔ استاد کی آنکھوں میں آنسو آ گئے۔ اس نے کہا، تم نے دنیا کا سب سے قیمتی تحفہ دیا ہے۔ بچے خوش ہو گئے۔ سبق: محبت بھرا عمل لفظوں سے زیادہ قیمتی ہوتا ہے۔"
+},
+{ 
+  title: "اندھا فقیر", 
+  text: "ایک اندھا فقیر روز مسجد کے باہر بیٹھتا تھا۔ لوگ سمجھتے وہ سارا دن مانگتا ہے۔ ایک دن ایک مسافر نے دیکھا کہ وہ پیسوں کا بڑا حصہ دوسروں کو دیتا ہے۔ پوچھا، تم خود ضرورت مند ہو؟ فقیر بولا، دوسروں کو دے کر سکون ملتا ہے۔ سبق: دینے والا ہمیشہ امیر ہوتا ہے، چاہے وہ غریب کیوں نہ ہو۔"
+},
+{ 
+  title: "اچھے الفاظ کی طاقت", 
+  text: "ایک شخص روز سب سے مسکرا کر ملتا تھا۔ لوگ اس کے قریب آنا پسند کرتے۔ ایک دن وہ بیمار ہو گیا تو پورا محلہ عیادت کے لیے آیا۔ اسے احساس ہوا کہ نرم لہجے کی طاقت سب سے بڑی ہوتی ہے۔ سبق: اچھے الفاظ دل جیت لیتے ہیں۔"
+},
+{ 
+  title: "نیکی چھپاؤ", 
+  text: "ایک نوجوان روز غریبوں کو کھانا دیتا تھا مگر کبھی کسی کو نہیں بتاتا تھا۔ ایک دن بادشاہ نے اسے دیکھا اور پوچھا تم ایسا کیوں کرتے ہو؟ اس نے کہا، نیکی دکھانے کے لیے نہیں ہوتی۔ بادشاہ نے اسے اپنے مشیر کے طور پر رکھ لیا۔ سبق: خالص نیکی ہمیشہ عزت دلاتی ہے۔"
+},
+{ 
+  title: "قدرت کا بدلہ", 
+  text: "ایک لڑکے نے درخت پر پتھر مارا۔ اگلے دن وہ گر پڑا اور چوٹ لگ گئی۔ اس نے کہا، یہ تو قدرت کا بدلہ ہے۔ اس دن سے وہ سب چیزوں کا احترام کرنے لگا۔ سبق: قدرت سے دشمنی نقصان دیتی ہے، احترام امن لاتا ہے۔"
+},
+{ 
+  title: "سچائی کی جیت", 
+  text: "ایک عدالت میں دو فریق تھے۔ ایک جھوٹ بولتا رہا، دوسرا سچ پر قائم رہا۔ آخر میں جج نے سچ بولنے والے کے حق میں فیصلہ دیا۔ سب نے تالیاں بجائیں۔ سبق: آخرکار جیت ہمیشہ سچائی کی ہوتی ہے۔"
+},
+{ 
+  title: "دو لمحوں کا صبر", 
+  text: "ایک لڑکی کپڑے سینے میں غلطی کر بیٹھی۔ وہ غصے میں آگئی مگر دادی نے کہا، دو لمحے صبر کر لو۔ اس نے آرام سے دوبارہ کیا تو کام بہتر ہو گیا۔ سبق: تھوڑا سا صبر بڑی غلطیوں سے بچاتا ہے۔"
+},
+{ 
+  title: "غلط فہمی", 
+  text: "دو دوستوں میں بات چیت بند ہو گئی کیونکہ ایک نے سنی سنائی بات پر یقین کر لیا۔ کچھ دن بعد حقیقت سامنے آئی کہ سب جھوٹ تھا۔ دونوں شرمندہ ہوئے۔ سبق: بغیر تحقیق کسی بات پر یقین نہ کرو۔"
+},
+{ 
+  title: "چھوٹا نیکی کا کام", 
+  text: "ایک لڑکے نے اسکول میں ٹوٹی ہوئی بینچ ٹھیک کر دی۔ استاد نے کہا، تم نے سب کے لیے آسانی پیدا کی۔ وہ خوش ہوا۔ سبق: چھوٹا سا نیک کام بھی بڑی بھلائی بن سکتا ہے۔"
+},
+{ 
+  title: "اپنے پر بھروسہ", 
+  text: "ایک پرندہ روز دریا پر پانی پیتا تھا۔ ایک دن دریا خشک ہو گیا۔ وہ گھبرا گیا مگر اڑا اور نیا چشمہ ڈھونڈ لیا۔ سبق: دوسروں پر نہیں، خود پر بھروسہ رکھو۔"
+},
+{ 
+  title: "خاموش نیکی", 
+  text: "ایک لڑکی روز اسکول جاتے وقت ایک درخت کے نیچے پانی رکھتی تھی۔ گرمی کے دنوں میں پرندے وہاں آ کر پیتے۔ کسی کو خبر نہیں تھی۔ ایک دن پرنسپل نے دیکھا اور کہا، تم نے انسانیت کا سبق سکھایا۔ سبق: خاموش نیکی سب سے خوبصورت نیکی ہے۔"
+},
+   { 
+  title: "چالاک بندر", 
+  text: "ایک گاؤں میں ایک بندر روز لوگوں کے پھل چرا لیتا تھا۔ سب تنگ آگئے۔ ایک دن ایک بوڑھے نے اس کے لیے الگ پھل رکھ دیے۔ بندر خوش ہو گیا اور چوری چھوڑ دی۔ گاؤں والے حیران رہ گئے۔ بوڑھا بولا، نرمی سے وہ ہو جاتا ہے جو سختی سے نہیں۔ سبق: محبت سے اصلاح ممکن ہے، غصے سے نہیں۔"
+},
+{ 
+  title: "بھولا ہوا سبق", 
+  text: "اکرم اسکول میں سبق یاد نہیں کرتا تھا۔ استاد نے کہا، یاد کرو ورنہ کل پرچہ ہے۔ وہ کھیلتا رہا۔ اگلے دن پرچہ دیکھ کر پسینے چھوٹ گئے۔ اب وہ روز پڑھنے لگا۔ سب نے کہا، دیر آید درست آید۔ سبق: محنت کا کوئی نعم البدل نہیں۔"
+},
+{ 
+  title: "کیک کا ٹکڑا", 
+  text: "دو بہنیں کیک کے لیے جھگڑ رہی تھیں۔ ماں آئی اور کہا، جو دوسروں کو بڑا حصہ دے، وہی اصل میں جیتا ہے۔ چھوٹی بہن نے آدھا کیک دے دیا۔ ماں نے اسے انعام دیا۔ بڑی بہن شرمندہ ہو گئی۔ سبق: بانٹنے سے محبت بڑھتی ہے۔"
+},
+{ 
+  title: "وقت کی قدر", 
+  text: "ایک لڑکا ہمیشہ کہتا تھا، کل سے پڑھوں گا۔ ایک دن امتحان آگیا اور وہ تیار نہ تھا۔ وہ رو پڑا۔ والد نے کہا، وقت ایک بار چلا جائے تو واپس نہیں آتا۔ اب وہ ہر لمحہ قیمتی سمجھتا ہے۔ سبق: وقت کی قدر کرنے والا ہی کامیاب ہوتا ہے۔"
+},
+{ 
+  title: "چور بلی", 
+  text: "ایک بلی روز دودھ چراتی تھی۔ ایک دن اس کے برتن میں پانی رکھا گیا۔ اس نے چکھا اور بھاگ گئی۔ مالک ہنس پڑا۔ اس دن کے بعد بلی نے چوری چھوڑ دی۔ سبق: غلطی سے سیکھنے والا ہی عقلمند ہوتا ہے۔"
+},
+{ 
+  title: "گھمنڈی مور", 
+  text: "مور اپنے خوبصورت پروں پر ناز کرتا تھا۔ ایک دن بارش میں اس کے پر خراب ہو گئے۔ چڑیا نے کہا، خوبصورتی وقتی ہوتی ہے، اخلاق ہمیشہ رہتا ہے۔ مور شرمندہ ہوا۔ سبق: اصل خوبصورتی کردار میں ہے، ظاهری شکل میں نہیں۔"
+},
+{ 
+  title: "جھاڑو والا لڑکا", 
+  text: "ایک اسکول میں ایک لڑکا جھاڑو لگاتا تھا۔ سب ہنستے تھے۔ ایک دن اسکول میں مقابلہ ہوا اور وہ صفائی کا ہیرو بن گیا۔ پرنسپل نے کہا، کوئی کام چھوٹا نہیں۔ سبق: عزت کام میں نہیں، نیت میں ہوتی ہے۔"
+},
+{ 
+  title: "دو روپے کی مدد", 
+  text: "ایک غریب عورت کے پاس صرف دو روپے تھے۔ اس نے بھوکے بچے کو دے دیے۔ شام کو اسے دگنی رقم تحفے میں ملی۔ اس نے کہا، نیکی دوگنی ہو کر لوٹتی ہے۔ سبق: جو بانٹتا ہے وہ کبھی خالی نہیں رہتا-"
+},
+{ 
+  title: "ہنسی کا تحفہ", 
+  text: "ایک اداس استاد کلاس میں آیا۔ ایک بچے نے مذاق میں کہا، سر آج آپ کے بال بہت اسٹائلش ہیں! سب ہنسنے لگے۔ استاد بھی مسکرا دیا۔ پورا دن خوشگوار گزر گیا۔ سبق: مسکراہٹ دوسروں کے دن بدل دیتی ہے۔"
+},
+{ 
+  title: "نادان شیر", 
+  text: "ایک شیر نے آئینہ دیکھا اور سمجھا دوسرا شیر ہے۔ وہ غصے میں دھاڑنے لگا۔ آخر تھک کر بیٹھ گیا۔ ایک لومڑی نے کہا، جس سے تم لڑ رہے ہو وہ تم خود ہو۔ شیر حیران رہ گئے۔ سبق: انسان اکثر اپنے غصے سے خود ہی ہارتا ہے۔"
+},
+{ 
+  title: "پھول اور کانٹا", 
+  text: "ایک پھول نے کانٹے سے کہا، تم کیوں ہمیشہ چبھتے ہو؟ کانٹے نے جواب دیا، میں تمہاری حفاظت کے لیے ہوں۔ پھول خاموش ہو گیا۔ سبق: بعض سختیاں دراصل حفاظت کا ذریعہ ہوتی ہے۔"
+},
+{ 
+  title: "پھٹے جوتے والا لڑکا", 
+  text: "ایک بچے کے جوتے پھٹ گئے، مگر وہ خوشی سے کھیلتا رہا- ایک امیر بچہ یہ دیکھ کر حیران ہوا۔ اس نے کہا، میں نئے جوتے ہوتے ہوئے بھی خوش نہیں۔ سبق: خوشی چیزوں سے نہیں، دل کے سکون سے ہوتی ہے۔"
+},
+{ 
+  title: "کتاب اور موبائل", 
+  text: "کتاب اور موبائل میں جھگڑا ہوا۔ کتاب بولی، میں علم دیتی ہوں۔ موبائل بولا، میں دنیا دکھاتا ہوں۔ ایک بچہ آیا، دونوں کو ساتھ رکھا اور کہا، علم اور ٹیکنالوجی ساتھ ہوں تو کامیابی یقینی ہے۔ سبق: توازن زندگی کی خوبصورتی ہے۔"
+},
+{ 
+  title: "بھولا ہوا کھلونا", 
+  text: "علی کا پسندیدہ کھلونا ٹوٹ گیا۔ وہ رونے لگا۔ ماں نے کہا، چیزیں بدل جاتی ہیں، مگر یادیں ہمیشہ رہتی ہیں۔ علی نے نیا کھلونا لیا مگر پرانے کی یاد دل میں رکھی۔ سبق: کھوئی چیز کا غم نہیں، یاد کا پیار اہم ہے۔"
+},
+{ 
+  title: "اندھی محبت", 
+  text: "ایک کسان اپنی گائے سے بہت محبت کرتا تھا۔ ایک دن وہ بیمار ہو گئی۔ کسان نے دن رات خدمت کی۔ گائے ٹھیک ہو گئی۔ اس نے جان لیا، محبت الفاظ سے نہیں، عمل سے ظاہر ہوتی ہے۔ سبق: خلوص دل سے کیا گیا پیار کبھی ضائع نہیں جاتا۔"
+},
+{ 
+  title: "نقلی دوست", 
+  text: "ایک لڑکے کے بہت سے دوست تھے، مگر جب وہ بیمار ہوا تو سب غائب ہو گئے۔ صرف ایک دوست آیا۔ اس نے کہا، دوست وہ نہیں جو خوشی میں ہو، بلکہ جو دکھ میں ساتھ رہے۔ سبق: دوست کم ہوں مگر سچے ہوں۔"
+},
+{ 
+  title: "قیمت احساس کی", 
+  text: "ایک لڑکے نے نیا فون لیا مگر باپ کے بنائے کھانے پر تنقید کی۔ باپ نے کہا، چیزوں کی نہیں، احساس کی قیمت ہوتی ہے۔ لڑکا شرمندہ ہوا۔ سبق: جذبات کی قدر کرو، چیزوں کی نہیں۔"
+},
+{ 
+  title: "نیکی کا پھل", 
+  text: "ایک لڑکی نے سردی میں ایک بلی کو کمبل دیا۔ کچھ دن بعد وہی بلی اس کے گھر کے چور پر جھپٹ پڑی۔ لڑکی نے کہا، نیکی کبھی بیکار نہیں جاتی۔ سبق: اللہ نیکی کا بدلہ ضرور دیتا ہے۔"
+},
+{ 
+  title: "پانی کا گلاس", 
+  text: "استاد نے گلاس پکڑایا اور کہا، جتنا دیر پکڑو گے، اتنا بوجھ لگے گا۔ شاگرد نے کہا، تو کیا کروں؟ استاد بولا، رکھ دو۔ اسی طرح فکر بھی وقت پر چھوڑ دو۔ سبق: فکروں کو زیادہ دیر نہ تھامو۔"
+},
+{ 
+  title: "آخری لقمہ", 
+  text: "ایک بچہ کھانا کھاتے ہوئے آخری لقمہ اپنے چھوٹے بھائی کو دے دیتا ہے۔ ماں مسکرا کر کہتی ہے، تم نے جنت کما لی۔ سبق: دوسروں کے لیے قربانی سب سے بڑی نیکی ہے۔"
+},
+    { 
+  title: "وقت کی قدر", 
+  text: "وقت ایک قیمتی خزانہ ہے۔ جو اس کی قدر کرتا ہے وہ ہمیشہ کامیاب ہوتا ہے۔ ایک لڑکا ہر روز کھیل میں وقت ضائع کرتا تھا۔ امتحان کے دن آیا تو اسے احساس ہوا کہ وقت ضائع ہو گیا۔ اس نے اگلی بار سے ہر لمحہ قیمتی سمجھا۔ وہ صبح جلدی اٹھنے لگا اور محنت کرنے لگا۔ سال کے آخر میں وہ کلاس میں اول آیا۔ سب نے اس کی تعریف کی۔ سبق: وقت ضائع نہ کریں، یہی زندگی کا سب سے بڑا سرمایہ ہے۔"
+},
+{ 
+  title: "غرور کا انجام", 
+  text: "ایک امیر آدمی اپنے غرور میں کسی کو کچھ نہیں سمجھتا تھا۔ ایک دن اس کی ساری دولت آگ میں جل گئی۔ وہ سڑک پر آ گیا۔ اب کسی نے اس کی مدد نہ کی۔ اس نے سمجھا کہ غرور انسان کو تنہا کر دیتا ہے۔ وہ نرمی اور عاجزی سے پیش آنے لگا۔ لوگوں نے اسے پھر قبول کیا۔ اس کی زندگی بدل گئی۔ سبق: غرور انسان کو گراتا ہے، عاجزی ہی اصل شان ہے۔"
+},
+{ 
+  title: "دوست کا امتحان", 
+  text: "علی اور بلال بہت اچھے دوست تھے۔ ایک دن علی بیمار ہو گیا۔ بلال روز اس سے ملنے آتا۔ دوائیں لاتا اور اس کی حوصلہ افزائی کرتا۔ علی نے ٹھیک ہو کر بلال کا شکریہ ادا کیا۔ اس نے کہا، سچا دوست وہی ہے جو مشکل میں ساتھ دے۔ بلال مسکرایا اور کہا، دوستی خدمت کا نام ہے۔ سبق: دوست وہ نہیں جو صرف خوشی میں ساتھ ہو، بلکہ جو دکھ میں بھی ساتھ رہے۔"
+},
+{ 
+  title: "چھوٹی نیکی", 
+  text: "ایک لڑکے نے راستے میں ایک بوڑھی عورت کا سامان اٹھانے میں مدد کی۔ عورت نے دعا دی۔ کچھ دن بعد وہی عورت اسپتال میں ملی۔ وہ ڈاکٹر نکلی جس نے اس لڑکے کا علاج کیا۔ اس نے کہا تمہاری نیکی نے تمہیں بچا لیا۔ لڑکا حیران رہ گیا۔ سبق: نیکی کبھی ضائع نہیں جاتی، وہ کسی نہ کسی صورت واپس آتی ہے۔"
+},
+{ 
+  title: "کتاب کی طاقت", 
+  text: "ایک لڑکی کو کتابیں پڑھنے کا شوق تھا۔ لوگ کہتے تھے کہ کتابوں سے کیا ہوگا۔ لیکن وہ روز کچھ نیا سیکھتی رہی۔ ایک دن اسکول میں تقریر کا مقابلہ ہوا۔ اس نے کتابوں سے سیکھے ہوئے علم سے سب کو حیران کر دیا۔ وہ پہلی پوزیشن لے آئی۔ سب نے مانا کہ علم ہی اصل طاقت ہے۔ سبق: کتاب انسان کی بہترین دوست ہے جو کبھی دھوکہ نہیں دیتی۔"
+},
+{ 
+  title: "غریب مگر خوش", 
+  text: "ایک غریب مزدور روز محنت کرتا تھا۔ اس کے پاس دولت نہیں تھی مگر دل مطمئن تھا۔ وہ شکر گزار تھا جو اللہ نے دیا۔ ایک دن ایک امیر شخص نے کہا، تمہارے پاس کچھ نہیں پھر بھی خوش ہو؟ مزدور نے کہا، کیونکہ میرے پاس سکون ہے۔ امیر سوچ میں پڑ گیا۔ سبق: اصل دولت دل کا سکون ہے، دولت نہیں۔"
+},
+{ 
+  title: "بردباری کا صلہ", 
+  text: "ایک لڑکے نے بازار میں کسی کے ساتھ بدتمیزی کی۔ دوسرا شخص خاموش رہا۔ لوگ حیران ہوئے۔ لڑکے کو بعد میں شرمندگی ہوئی اور اس نے معافی مانگی۔ خاموش شخص نے مسکرا کر کہا، غصہ کمزوروں کا ہتھیار ہے، صبر بہادروں کا۔ سبق: غصہ برداشت سے ختم ہوتا ہے، بدلہ لینے سے نہیں۔"
+},
+{ 
+  title: "عقلمند بیٹا", 
+  text: "ایک باپ نے اپنے بیٹے کو کہا، اگر تم کامیاب ہونا چاہتے ہو تو ہمیشہ ایمانداری سے کام کرو۔ بیٹے نے ایسا ہی کیا۔ چند سال بعد وہ ایک بڑا افسر بن گیا۔ اس نے کبھی رشوت نہ لی۔ لوگ اس کی تعریف کرتے تھے۔ باپ نے کہا، دیکھو ایمانداری نے تمہیں کہاں پہنچا دیا۔ سبق: ایمانداری ہمیشہ کامیابی کا راستہ دکھاتی ہے۔"
+},
+{ 
+  title: "اندھا اور لڑکا", 
+  text: "ایک نابینا شخص سڑک پار کر رہا تھا۔ ایک لڑکے نے آگے بڑھ کر اس کا ہاتھ پکڑا۔ سب نے دیکھا کہ وہ دوسروں کے لیے مثال بن گیا۔ نابینا شخص نے دعا دی۔ لڑکے کے دل کو سکون ملا۔ اس دن سے اس نے عادت بنا لی کہ دوسروں کی مدد کرے۔ سبق: دوسروں کے لیے آسانی پیدا کرو، اللہ تمہارے لیے آسانی پیدا کرے گا۔"
+},
+{ 
+  title: "چھوٹی بات کا بڑا اثر", 
+  text: "ایک استاد نے کلاس میں کہا، ایک اچھی بات کسی کا دن بدل سکتی ہے۔ ایک لڑکی نے اپنی ساتھی سے کہا، تم بہت محنتی ہو۔ وہ خوش ہو گئی اور مزید دل لگا کر پڑھنے لگی۔ امتحان میں پہلی آئی۔ سب حیران تھے۔ استاد نے کہا، یہی مثبت سوچ کی طاقت ہے۔ سبق: اچھے الفاظ انسان کے دل میں روشنی پیدا کرتے ہیں۔"
+},
+ 
+ { 
+  title: "گمشدہ بٹوہ", 
+  text: "ایک دن احمد کو راستے میں ایک بٹوہ ملا۔ اس میں بہت ساری رقم تھی۔ وہ اسے پولیس اسٹیشن لے گیا۔ اگلے دن مالک آیا اور شکر گزار ہوا۔ اس نے احمد کو انعام دینا چاہا مگر احمد نے انکار کر دیا۔ مالک نے کہا تم جیسے لوگ دنیا میں ایمان کی مثال ہیں۔ احمد کے والدین فخر سے بھر گئے۔ سب نے اس کی ایمانداری کی تعریف کی۔ سبق: دیانتداری انسان کو سب سے بلند مقام دیتی ہے۔"
+},
+{ 
+  title: "ماں کی دعا", 
+  text: "ایک غریب لڑکا ہمیشہ محنت کرتا مگر کامیاب نہیں ہوتا تھا۔ ایک دن اس نے ماں سے کہا، میری قسمت خراب ہے۔ ماں نے مسکرا کر دعا دی۔ اگلے امتحان میں وہ کامیاب ہوا۔ اس نے سمجھا کہ ماں کی دعا کبھی رائیگاں نہیں جاتی۔ وہ ہمیشہ اپنی ماں کی خدمت کرتا رہا۔ لوگ اسے نیک اور کامیاب سمجھنے لگے۔ سبق: ماں کی دعا سب سے بڑی طاقت ہے۔"
+},
+{ 
+  title: "پرانی جوتی", 
+  text: "ایک امیر لڑکا غریب بچوں کو اپنی پرانی جوتی پہنے دیکھ کر ہنسنے لگا۔ ایک دن اس کی اپنی جوتی گم ہو گئی۔ وہ ننگے پاؤں گھر گیا۔ راستے میں اس نے ایک بچے کو دیکھا جس کے پاؤں ہی نہیں تھے۔ وہ شرمندہ ہو گیا۔ اس دن سے وہ غرور چھوڑ کر شکر گزار بن گیا۔ سبق: دوسروں کی تکلیف پر ہنسنا نہیں چاہیے، بلکہ شکر ادا کرنا چاہیے۔"
+},
+{ 
+  title: "پانی کا قطرہ", 
+  text: "ایک صحرا میں ایک شخص پیاس سے مر رہا تھا۔ اچانک اسے پانی کا ایک قطرہ ملا۔ اس نے سوچا، یہ قطرہ میری جان بچا سکتا ہے۔ اس نے اللہ کا شکر ادا کیا۔ جب وہ گاؤں پہنچا تو سب کو بتایا کہ چھوٹی چیز بھی بڑی نعمت بن سکتی ہے۔ سب متاثر ہوئے۔ سبق: شکرگزاری سے زندگی میں برکت آتی ہے۔"
+},
+{ 
+  title: "بے کار پتھر", 
+  text: "ایک مزدور روز ایک پتھر کو اٹھا کر دوسری جگہ رکھتا۔ لوگ مذاق اڑاتے۔ ایک دن بادشاہ نے دیکھا کہ وہ پتھر کے نیچے خزانہ چھپا ہے۔ مزدور امیر ہو گیا۔ سب حیران رہ گئے۔ اس نے کہا، میں نے محنت کو کبھی فضول نہیں سمجھا۔ سبق: ہر محنت کا پھل وقت پر ملتا ہے۔"
+},
+{ 
+  title: "غلطی کا احساس", 
+  text: "ایک لڑکی نے اپنی دوست سے تلخ بات کہی۔ دوست رو کر چلی گئی۔ رات کو لڑکی کو احساس ہوا کہ وہ غلط تھی۔ اگلے دن اس نے جا کر معافی مانگی۔ دوست نے اسے گلے لگا لیا- دونوں کی دوستی پہلے سے مضبوط ہو گئی۔ سبق: اپنی غلطی مان لینا کمزوری نہیں بلکہ بہادری ہے۔"
+},
+{ 
+  title: "خواب دیکھنے والا", 
+  text: "عاصم ایک غریب لڑکا تھا مگر خواب بڑے دیکھتا تھا۔ سب کہتے تھے کہ وہ کچھ نہیں کر سکتا۔ مگر اس نے یقین نہیں چھوڑا۔ دن رات پڑھتا رہا۔ آخرکار وہ ایک سائنسدان بن گیا۔ اس نے کہا، خواب دیکھنا آسان ہے مگر ان کے لیے محنت کرنا اصل ہمت ہے۔ سبق: خواب وہی سچے ہوتے ہیں جن کے لیے جاگ کر محنت کی جائے۔"
+},
+{ 
+  title: "محبت کا درخت", 
+  text: "ایک لڑکے نے بچپن میں ایک درخت لگایا۔ روز پانی دیتا اور دیکھ بھال کرتا۔ سالوں بعد وہ درخت بڑا ہو گیا۔ جب وہ بڑا ہوا، اس درخت نے اسے سایہ، پھل اور سکون دیا۔ ایک دن لڑکا درخت کے نیچے بیٹھ کر رو پڑا کہ محبت ہمیشہ لوٹ کر آتی ہے۔ سبق: جو پیار اور خدمت ہم دیتے ہیں، وہی ہمیں واپس ملتی ہے۔"
+},
+{ 
+  title: "برداشت کی طاقت", 
+  text: "ایک لڑکی پر دوست نے الزام لگایا۔ سب نے باتیں بنائیں مگر اس نے خاموشی اختیار کی۔ وقت نے سچ دکھا دیا۔ سب نے اس سے معافی مانگی۔ اس نے کہا، میں نے اللہ پر بھروسہ رکھا۔ لوگوں نے سیکھا کہ خاموشی بھی بڑی طاقت ہے۔ سبق: ہر بات کا جواب دینا ضروری نہیں، کبھی صبر ہی سب سے بہتر جواب ہوتا ہے۔"
+},
+              
+              {
+  title: "محنت کا پھل",
+  text: "احمد ایک غریب لڑکا تھا لیکن خواب بہت بڑے رکھتا تھا۔ وہ دن رات محنت کرتا، پڑھائی میں دل لگاتا۔ اس کے دوست کھیل کود میں وقت ضائع کرتے تھے۔ احمد کہتا تھا: 'وقت ضائع کرنا نقصان ہے'۔ سال کے آخر میں جب نتیجہ آیا تو احمد نے پہلی پوزیشن حاصل کی۔ استاد نے سب کے سامنے اُس کی تعریف کی۔ دوستوں نے وعدہ کیا کہ وہ بھی محنت کریں گے۔ احمد نے کہا: 'کامیابی انہی کو ملتی ہے جو ہمت نہیں ہارتے'۔ اخلاقی سبق: محنت کا پھل ہمیشہ میٹھا ہوتا ہے۔"
+},
+{
+  title: "جھوٹ کا انجام",
+  text: "ایک گاؤں میں ایک لڑکا رہتا تھا جو ہمیشہ جھوٹ بولتا تھا۔ وہ روز کہتا کہ شیر آ گیا، لوگ دوڑ کر آتے مگر کچھ نہیں ہوتا۔ ایک دن واقعی شیر آ گیا۔ اس نے چیخ کر مدد مانگی، مگر کسی نے یقین نہ کیا۔ شیر نے اُس کے جانوروں پر حملہ کیا۔ لڑکا روتا رہ گیا۔ اگلے دن گاؤں والوں نے کہا: 'جھوٹ ہمیشہ نقصان دیتا ہے'۔ لڑکے نے وعدہ کیا کہ اب کبھی جھوٹ نہیں بولے گا۔ اخلاقی سبق: سچائی سب سے بڑی طاقت ہے۔"
+},
+{
+  title: "دوستی کا حق",
+  text: "علی اور بلال بہت اچھے دوست تھے۔ ایک دن سفر کے دوران ان پر ایک ریچھ نے حملہ کیا۔ علی درخت پر چڑھ گیا، بلال زمین پر لیٹ گیا۔ ریچھ نے سونگھا اور چلا گیا۔ بعد میں علی نے پوچھا: 'ریچھ نے کیا کہا؟' بلال بولا: 'کہ سچے دوست مشکل میں کام آتے ہیں'۔ علی شرمندہ ہو گیا۔ اُس نے کہا: 'میں آئندہ کبھی تمہیں اکیلا نہیں چھوڑوں گا'۔ دونوں نے گلے لگا کر دوستی پکی کی۔ اخلاقی سبق: سچا دوست وہی ہے جو مشکل وقت میں ساتھ دے۔"
+},
+{
+  title: "لالچ بری بلا",
+  text: "ایک کسان کے پاس سونے کے انڈے دینے والی مرغی تھی۔ وہ روز ایک انڈہ لیتی تھی۔ ایک دن وہ لالچی ہو گیا۔ اُس نے سوچا کہ کیوں نہ سب انڈے ایک ساتھ حاصل کر لوں۔ اُس نے مرغی کو ذبح کر دیا۔ مگر اندر کچھ نہ ملا۔ وہ رو پڑا۔ اُس کی محنت برباد ہو گئی۔ اسے احساس ہوا کہ لالچ ہمیشہ نقصان دیتا ہے۔ اخلاقی سبق: لالچ انسان کو تباہ کر دیتا ہے۔"
+},
+{
+  title: "وقت کی قدر",
+  text: "وقت ایک خزانہ ہے جسے ضائع نہیں کرنا چاہیے۔ علی ہمیشہ کہتا تھا کہ 'وقت سونا ہے'۔ وہ ہر کام وقت پر کرتا تھا۔ اُس کے دوست وقت ضائع کرتے، پھر پچھتاتے۔ امتحان میں علی کامیاب ہوا، باقی سب ناکام۔ استاد نے کہا: 'وقت کی قدر کرنے والا کبھی ناکام نہیں ہوتا'۔ دوستوں نے وعدہ کیا کہ وہ بھی وقت کی قدر کریں گے۔ اخلاقی سبق: جو وقت کی قدر کرتا ہے، وہ کامیابی حاصل کرتا ہے۔"
+},
+
+              
+              
+{ 
+  title: "غم میں مسکراہٹ", 
+  text: "ایک چھوٹا بچہ ہمیشہ خوش رہتا تھا۔ ایک دن اس کے والد کا انتقال ہو گیا۔ سب نے سوچا اب وہ خاموش ہو جائے گا۔ مگر وہ بولا، میرے ابو نے سکھایا تھا کہ مشکل میں بھی مسکراؤ۔ سب اس کے حوصلے پر حیران تھے۔ وہ دوسروں کے لیے حوصلے کی مثال بن گیا۔ سبق: غم کے وقت حوصلہ رکھنا ایمان کی علامت ہے۔"
+},
+             
+            
+              
+              
+              
+              
+              
+              
+              { title: "ہمارا ملک پاکستان", text: "پاکستان ایک خوبصورت ملک ہے۔ یہ چودہ اگست انیس سو سینتالیس کو معرض وجود میں آیا۔ اس کے چار صوبے ہیں۔ اس کا دارالحکومت اسلام آباد ہے۔ یہاں مختلف قومیتوں کے لوگ رہتے ہیں لیکن ہم سب پاکستانی ہیں۔ ہمیں اپنے ملک کی حفاظت اور ترقی کے لیے مل کر کام کرنا چاہیے۔" }
+            ];
+
+            let timer, timeRemaining, testStarted = false, testFinished = false, wordSpans, currentWordIndex = 0, mistakes = 0, wpmHistory = [], mistakeDetails = [], chartInstance;
+
+            function init() {
+                paragraphs.forEach((p, index) => {
+                    const option = new Option(p.title, index);
+                    paragraphSelect.add(option);
+                });
+
+                startBtn.addEventListener('click', startTest);
+                typingInput.addEventListener('input', handleTyping);
+                typingInput.addEventListener('keydown', handleBackspace);
+                restartBtn.addEventListener('click', resetTest);
+                restartFromResultsBtn.addEventListener('click', resetTest);
+                
+                downloadWithMistakesBtn.addEventListener('click', () => downloadReport(true, downloadWithMistakesBtn));
+                downloadWithoutMistakesBtn.addEventListener('click', () => downloadReport(false, downloadWithoutMistakesBtn));
+                downloadMistakesOnlyBtn.addEventListener('click', () => downloadMistakesOnly(downloadMistakesOnlyBtn));
+
+                rollNumberInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, ''); });
+
+                usernameInput.addEventListener('focus', () => urduHelper.classList.remove('hidden'));
+                usernameInput.addEventListener('blur', () => urduHelper.classList.add('hidden'));
+                usernameInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\u0600-\u06FF\s]/g, ''); });
+
+                // <!-- نئی تبدیلی: ٹوگل بٹن کے لیے کلک ایونٹ -->
+                backspaceToggleBtn.addEventListener('click', () => {
+                    backspaceToggleBtn.classList.toggle('active');
+                    const isChecked = backspaceToggleBtn.classList.contains('active');
+                    backspaceToggleBtn.setAttribute('aria-checked', isChecked);
+                });
+            }
+
+            function startTest() {
+                if (!usernameInput.value || !rollNumberInput.value) {
+                    alert("براہ کرم اپنا نام اور رول نمبر درج کریں۔");
+                    return;
+                }
+
+                setupScreen.classList.add('hidden');
+                resultsScreen.classList.add('hidden');
+                typingTestScreen.classList.remove('hidden');
+
+                timeRemaining = parseInt(timeSelect.value);
+                updateTimerDisplay();
+                
+                const paragraphText = paragraphs[paragraphSelect.value].text;
+                paragraphDisplay.innerHTML = '';
+                mistakeList.innerHTML = '';
+                wordSpans = paragraphText.split(' ').map(word => {
+                    const span = document.createElement('span');
+                    span.textContent = word + ' ';
+                    paragraphDisplay.appendChild(span);
+                    return span;
+                });
+
+                resetState();
+                wordSpans[0].classList.add('current');
+                typingInput.focus();
+            }
+            
+            function handleBackspace(e) {
+                // <!-- نئی تبدیلی: بٹن کی کلاس چیک کریں -->
+                if (e.key === 'Backspace' && backspaceToggleBtn.classList.contains('active')) {
+                    e.preventDefault();
+                }
+            }
+
+            function handleTyping() {
+                if (!testStarted && !testFinished) {
+                    testStarted = true;
+                    timer = setInterval(updateTimer, 1000);
+                }
+                if (testFinished) return;
+                
+                if (typingInput.value.endsWith(' ')) {
+                    checkWord();
+                } else {
+                    const currentTypedWord = typingInput.value.trim();
+                    const currentTargetWord = wordSpans[currentWordIndex].textContent.trim();
+                    wordSpans[currentWordIndex].classList.toggle('incorrect', !currentTargetWord.startsWith(currentTypedWord));
+                }
+            }
+
+            function checkWord() {
+                const typedWord = typingInput.value.trim();
+                const targetWord = wordSpans[currentWordIndex].textContent.trim();
+                wordSpans[currentWordIndex].classList.remove('current');
+
+                if (typedWord === targetWord) {
+                    wordSpans[currentWordIndex].classList.add('correct');
+                } else {
+                    wordSpans[currentWordIndex].classList.add('incorrect');
+                    mistakes++;
+                    mistakesLiveDisplay.textContent = mistakes;
+                    mistakeList.insertAdjacentHTML('beforeend', `<span>${targetWord}</span>`);
+                    mistakeDetails.push({ correct: targetWord, typed: typedWord || "---" });
+                }
+
+                currentWordIndex++;
+                if (currentWordIndex >= wordSpans.length) { endTest(); return; }
+                wordSpans[currentWordIndex].classList.add('current');
+                typingInput.value = '';
+            }
+
+            function updateTimer() {
+                timeRemaining--;
+                updateTimerDisplay();
+                if ((parseInt(timeSelect.value) - timeRemaining) % 5 === 0) {
+                   const timeElapsed = parseInt(timeSelect.value) - timeRemaining;
+                   const correctWords = currentWordIndex - mistakes;
+                   const currentWpm = Math.round((correctWords / timeElapsed) * 60) || 0;
+                   wpmHistory.push(currentWpm);
+                   wpmLiveDisplay.textContent = currentWpm;
+                }
+                if (timeRemaining <= 0) endTest();
+            }
+
+            function endTest() {
+                clearInterval(timer);
+                testFinished = true;
+                typingTestScreen.classList.add('hidden');
+                resultsScreen.classList.remove('hidden');
+                typingInput.disabled = true;
+                calculateAndDisplayResults();
+            }
+            
+            function calculateAndDisplayResults() {
+                const timeTaken = parseInt(timeSelect.value); // Use total time for WPM
+                const totalWordsTyped = currentWordIndex;
+                const correctWords = totalWordsTyped - mistakes;
+                const wpm = Math.round((correctWords / timeTaken) * 60) || 0;
+                const accuracy = totalWordsTyped > 0 ? Math.round((correctWords / totalWordsTyped) * 100) : 0;
+                
+                const now = new Date();
+                reportDate.textContent = `تاریخ: ${now.toLocaleDateString('ur-PK', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+                reportTime.textContent = `وقت: ${now.toLocaleTimeString('ur-PK', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+
+                reportUsername.textContent = usernameInput.value;
+                reportRollNo.textContent = rollNumberInput.value;
+                reportTotalWords.textContent = totalWordsTyped;
+                reportCorrectWords.textContent = correctWords;
+                reportIncorrectWords.textContent = mistakes;
+                reportAccuracy.textContent = `${accuracy}%`;
+                reportWPM.textContent = wpm;
+                
+                reportMistakeList.innerHTML = '';
+                if (mistakeDetails.length > 0) {
+                    mistakeDetails.forEach(mistake => {
+                        const item = document.createElement('div');
+                        item.className = 'mistake-grid-item';
+                        item.innerHTML = `
+                            <div class="correct-word-display">درست لفظ: <span>${mistake.correct}</span></div>
+                            <div class="typed-word-display">آپ نے لکھا: <span>${mistake.typed}</span></div>
+                        `;
+                        reportMistakeList.appendChild(item);
+                    });
+                }
+                renderChart();
+            }
+
+            function renderChart() {
+                const ctx = document.getElementById('wpm-chart').getContext('2d');
+                const labels = Array.from({ length: wpmHistory.length }, (_, i) => `${(i + 1) * 5}s`);
+                if (chartInstance) chartInstance.destroy();
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels, datasets: [{ label: 'الفاظ فی منٹ (WPM)', data: wpmHistory, borderColor: '#28a745', backgroundColor: 'rgba(40, 167, 69, 0.1)', fill: true, tension: 0.3 }] },
+                    options: { responsive: true, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+                });
+            }
+            
+            function downloadReport(includeMistakes, buttonElement) {
+                const spinner = buttonElement.querySelector('.spinner');
+                const btnText = buttonElement.querySelector('.btn-text');
+                spinner.classList.remove('hidden'); btnText.classList.add('hidden'); buttonElement.disabled = true;
+                
+                reportMistakesContainer.classList.toggle('hidden', !(includeMistakes && mistakeDetails.length > 0));
+
+                html2canvas(reportCard, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `Typing-Report-${usernameInput.value.replace(/ /g,'_')}-${reportRollNo.textContent}${includeMistakes ? '-with-mistakes' : ''}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.9);
+                    link.click();
+                }).catch(err => console.error("Download failed:", err)).finally(() => {
+                    reportMistakesContainer.classList.add('hidden');
+                    spinner.classList.add('hidden'); btnText.classList.remove('hidden'); buttonElement.disabled = false;
+                });
+            }
+
+            function downloadMistakesOnly(buttonElement) {
+                if(mistakeDetails.length === 0){ alert("کوئی غلطی موجود نہیں ہے۔"); return; }
+                const spinner = buttonElement.querySelector('.spinner');
+                const btnText = buttonElement.querySelector('.btn-text');
+                spinner.classList.remove('hidden'); btnText.classList.add('hidden'); buttonElement.disabled = true;
+
+                reportHeader.classList.add('hidden'); reportGrid.classList.add('hidden'); chartContainer.classList.add('hidden');
+                reportMistakesContainer.classList.remove('hidden');
+
+                html2canvas(reportCard, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `Mistakes-Report-${usernameInput.value.replace(/ /g,'_')}-${reportRollNo.textContent}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.9);
+                    link.click();
+                }).catch(err => console.error("Mistakes download failed:", err)).finally(() => {
+                    reportHeader.classList.remove('hidden'); reportGrid.classList.remove('hidden'); chartContainer.classList.remove('hidden');
+                    reportMistakesContainer.classList.add('hidden');
+                    spinner.classList.add('hidden'); btnText.classList.remove('hidden'); buttonElement.disabled = false;
+                });
+            }
+            
+            function resetTest() {
+                clearInterval(timer);
+                resultsScreen.classList.add('hidden');
+                typingTestScreen.classList.add('hidden');
+                setupScreen.classList.remove('hidden');
+                usernameInput.value = '';
+                rollNumberInput.value = '';
+                // <!-- نئی تبدیلی: ٹوگل بٹن کو ری سیٹ کریں -->
+                backspaceToggleBtn.classList.remove('active');
+                backspaceToggleBtn.setAttribute('aria-checked', 'false');
+                resetState();
+            }
+            
+            function resetState() {
+                testStarted = false; testFinished = false; currentWordIndex = 0; mistakes = 0;
+                wpmHistory = []; mistakeDetails = [];
+                wpmLiveDisplay.textContent = '0'; mistakesLiveDisplay.textContent = '0';
+                typingInput.value = ''; typingInput.disabled = false;
+            }
+            
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+
+            init();
+        });
+    </script>
+
+</body>
+</html>
