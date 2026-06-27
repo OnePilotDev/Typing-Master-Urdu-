@@ -21,21 +21,21 @@
 
         body {
             font-family: 'Noto Nastaliq Urdu', 'Alvi Nastaleeq Regular', sans-serif;
-            background-color: #ffffff; /* Attractive White UI */
+            background-color: #eef2f5; /* Attractive Soft Background */
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             min-height: 100vh;
-            padding: 15px;
+            padding: 10px;
             direction: rtl; /* Right-to-Left for Urdu */
         }
 
         .container {
-            width: 95%;
-            max-width: 900px;
+            width: 100%;
+            max-width: 800px; /* Perfect width for setup card */
             background-color: #fdfdfd;
-            padding: 25px;
+            padding: 20px 30px;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
@@ -43,53 +43,89 @@
         /* Heading */
         h1 {
             color: #28a745; /* Green Color */
-            font-size: 3.0rem; /* As requested */
+            font-size: 2.2rem; /* Reduced from 3.0rem to save massive space */
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 2px solid #28a745;
-            padding-bottom: 10px;
+            padding-bottom: 5px;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #333;
         }
 
-        /* Font size for the entire interface */
-        .container, input, select, button, label, textarea {
-            font-size: 2.0rem; /* A to Z interface font size */
+        /* Global Font styling for Form elements */
+        input, select, button, label, textarea {
             font-family: 'Noto Nastaliq Urdu', 'Alvi Nastaleeq Regular', sans-serif;
         }
-        /* Reduce font size for smaller elements for better balance */
-        .stats-bar, .mistake-highlight-area h3, .results-controls button {
-            font-size: 1.5rem;
+
+        /* --- Custom Optimized Font Sizes to avoid 100% Zoom Scrolling Issue --- */
+        label {
+            font-size: 1.3rem !important; /* Perfect Nastaleeq size for form labels */
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], select {
+            font-size: 1.2rem !important;
+            padding: 8px 12px !important;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+        button {
+            font-size: 1.3rem !important;
+            padding: 10px 15px !important;
+            margin-top: 15px !important;
+            display: block;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #94dcb0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Beautiful download font button styling */
+        #download-font-btn {
+            background: linear-gradient(45deg, #17a2b8, #138496) !important;
+            margin-top: 10px !important;
+        }
+        #download-font-btn:hover {
+            background: linear-gradient(45deg, #138496, #117a8b) !important;
+            transform: translateY(-2px);
         }
 
         /* Setup Screen */
         #setup-screen .form-grid {
             display: grid;
             grid-template-columns: auto 1fr;
-            gap: 20px;
+            gap: 12px; /* Reduced gap to save height */
             align-items: center;
-            margin-bottom: 30px;
-        }
-        #setup-screen label {
-            font-weight: bold;
-            color: #555;
-        }
-        #setup-screen input, #setup-screen select {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        #setup-screen input:focus, #setup-screen select:focus {
-            outline: none;
-            border-color: #28a745;
-            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+            margin-bottom: 15px;
         }
         
         /* Urdu Helper Message Style */
@@ -97,23 +133,23 @@
             position: relative;
         }
         #urdu-helper {
-            font-size: 1.2rem;
+            font-size: 1.0rem;
             color: #888;
-            margin-top: 5px;
+            margin-top: 2px;
             display: block;
         }
 
-        /* <!-- نئی تبدیلی: ٹوگل سوئچ کے لیے اسٹائل --> */
+        /* Toggle Switch styling scaled down */
         .toggle-switch-container {
             display: flex;
             align-items: center;
             justify-content: flex-start; 
         }
         .toggle-switch {
-            width: 70px;
-            height: 34px;
+            width: 60px;
+            height: 30px;
             background-color: #ccc;
-            border-radius: 34px;
+            border-radius: 30px;
             position: relative;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -122,65 +158,41 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             background-color: white;
             border-radius: 50%;
             transition: transform 0.3s ease;
         }
         .toggle-switch.active {
-            background-color: #28a745; /* فعال ہونے پر ہرا رنگ */
+            background-color: #28a745; /* Green active color */
         }
         .toggle-switch.active .toggle-thumb {
-            transform: translateX(36px);
+            transform: translateX(30px);
         }
-
-
-        /* Buttons */
-        button {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
-        button:disabled {
-            background-color: #94dcb0;
-            cursor: not-allowed;
-            transform: none;
-        }
-
 
         /* Typing Test Screen */
         .stats-bar {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             background-color: #f0f0f0;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
+            font-size: 1.2rem; /* Perfectly readable stats */
         }
         .stat {
             font-weight: bold;
         }
 
-        /* Modified paragraph display to show full text without scroll and fit 100% view */
+        /* Optimized paragraph display to show full text compactly and prevent browser scroll */
         #paragraph-display {
             background-color: #f9f9f9;
-            padding: 15px 20px;
+            padding: 10px 15px; /* Reduced padding */
             border-radius: 8px;
-            line-height: 2.0; /* Adjusted for Nastaleeq line heights */
-            margin-bottom: 15px;
-            font-size: 1.8rem; /* Highly readable but avoids excessive overflow */
+            line-height: 1.8; /* Lowered from 2.0 to conserve vertical space */
+            margin-bottom: 12px;
+            font-size: 1.5rem; /* Scaled from 1.8rem to prevent page overflow */
             text-align: justify;
         }
 
@@ -203,14 +215,15 @@
             border-radius: 4px;
         }
 
-        /* Compacted height to avoid page scrolling at 100% resolution */
+        /* Typing Area styling optimized for compact viewports */
         #typing-input {
             width: 100%;
-            height: 110px;
-            padding: 12px;
+            height: 80px; /* Reduced from 100px */
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
             resize: none;
+            font-size: 1.5rem;
         }
         #typing-input:focus {
             outline: none;
@@ -218,15 +231,16 @@
         }
 
         .mistake-highlight-area {
-            margin-top: 15px;
-            padding: 12px;
+            margin-top: 10px;
+            padding: 8px 12px;
             background: #fff0f1;
             border: 1px solid #dc3545;
             border-radius: 8px;
-            min-height: 45px;
+            min-height: 35px;
         }
         .mistake-highlight-area h3 {
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
             color: #dc3545;
         }
         #mistake-list {
@@ -234,6 +248,7 @@
             flex-wrap: wrap;
             gap: 10px;
             color: #721c24;
+            font-size: 1.2rem;
         }
 
         /* Secondary actions styled buttons (Restart Button styling) */
@@ -272,7 +287,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
         .grid-item {
             background-color: #f8f9fa;
@@ -291,7 +306,7 @@
         }
         #wpm-grid-item {
             grid-column: 1 / -1;
-            font-size: 2.2rem;
+            font-size: 2.0rem;
         }
         .chart-container {
             margin-top: 25px;
@@ -303,7 +318,7 @@
             border-top: 1px dashed #ccc;
         }
          #report-mistakes-container h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #dc3545;
             margin-bottom: 15px;
             text-align: center;
@@ -318,7 +333,7 @@
             border: 1px solid #f0b8be;
             border-radius: 8px;
             padding: 15px;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
         .mistake-grid-item div {
             margin-bottom: 8px;
@@ -407,6 +422,13 @@
 
             </div>
             <button id="start-btn">ٹائپنگ شروع کریں</button>
+            
+            <!-- Link to download Urdu font -->
+            <a href="https://www.mediafire.com/file/476w1n8ra78eetf/Alvi+Nastaleeq+Font.rar/file" target="_blank" style="text-decoration: none; display: block; width: 100%;">
+                <button type="button" id="download-font-btn">
+                    پہلی بار ٹائپنگ کے لیے اردو فونٹ ڈاؤن لوڈ کریں
+                </button>
+            </a>
         </div>
 
         <!-- Typing Test Screen (بغیر کسی تبدیلی کے) -->
@@ -553,7 +575,7 @@
                
               { 
   title: "صفائی کی اہمیت", 
-  text: "صفائی نصف ایمان ہے۔ صاف ماحول صحت مند زندگی کے لیے ضروری ہے۔ گندگی بیماریوں کو جنم دیتی ہے۔ ہمیں اپنے گھر اور اردگرد کے ماحول کو صاف رکھنا چاہیے۔ اسلام نے भी صفائی پر زور دیا ہے۔ صاف ستھرا انسان سب کو پسند آتا ہے۔ صفائی سے انسان کی شخصیت نکھرتی ہے۔ صاف لباس اور صاف دل دونوں ضروری ہیں۔ اسکول، گلی اور محلہ سب صاف رہنے چاہییں۔ ہمیں ہمیشہ صفائی کو اپنی عادت بنانا چاہیے۔"
+  text: "صفائی نصف ایمان ہے۔ صاف ماحول صحت مند زندگی کے لیے ضروری ہے۔ گندگی بیماریوں کو جنم دیتی ہے۔ ہمیں اپنے گھر اور اردگرد کے ماحول کو صاف رکھنا چاہیے۔ اسلام نے بھی صفائی پر زور دیا ہے۔ صاف ستھرا انسان سب کو پسند آتا ہے۔ صفائی سے انسان کی شخصیت نکھرتی ہے۔ صاف لباس اور صاف دل دونوں ضروری ہیں۔ اسکول، گلی اور محلہ سب صاف رہنے چاہییں۔ ہمیں ہمیشہ صفائی کو اپنی عادت بنانا چاہیے۔"
 },
               
   { 
@@ -579,7 +601,7 @@
 },
 { 
   title: "محنتی طالبعلم", 
-  text: "ایک طالبعلم بہت سست تھا۔ ہمیشہ کھیل میں وقت ضائع کرتا تھا۔ امتحان قریب آیا تو اس نے محنت شروع کی۔ دن رات پڑھتا رہا۔ آخرکار امتحان میں کامیاب ہوا۔ اس کے والدین بہت خوش ہوئے۔ دوستوں نے بھی اس کی تعریف کی۔ اس نے سیکھا کہ محنت کا پھل ہمیشہ میٹھا ہوتا ہے۔ اب وہ کبھی وقت ضائع نہیں کرتا۔ سبق: محنت ہی کامیابی کی کنجی ہے، بغیر محنت کچھ حاصل نہیں ہوتا۔"
+  text: "ایک طالبعلم بہت سست تھا۔ ہمیشہ کھیل میں وقت ضائع کرتا تھا۔ امتحان قریب آیا تو اس نے محنت شروع کی۔ دن رات پڑھتا رہا۔ آخرکار امتحان میں کامیاب ہوا۔ اس کے والدین بہت خوش ہوئے۔ دوستوں نے بھی اس کی تعریف کی۔ اس نے سیکھا کہ محنت کا پھل ہمیشہ میٹھا ہوتا ہے۔ اب وہ کبھی وقت ضائع نہیں کرتا- سبق: محنت ہی کامیابی کی کنجی ہے، بغیر محنت کچھ حاصل نہیں ہوتا۔"
 },
           
     { 
@@ -628,11 +650,11 @@
 },
 { 
   title: "جھوٹا چرواہا", 
-  text: "ایک چرواہا روز جھوٹ بولتا کہ شیر آگیا ہے۔ گاؤں والے بھاگ کر آتے مگر شیر نہیں ہوتا۔ ایک دن سچ میں شیر آگیا۔ اس نے مدد کے لیے پکارا مگر کوئی نہ آیا۔ شیر نے بھیڑوں کو کھا لیا۔ وہ رونے لگا۔ سبق: جھوٹ بولنے والا سچ بول کر بھی یقین نہیں دلا سکتا۔"
+  text: "ایک چرواہا روز جھوٹ بولتا کہ شیر آگیا ہے۔ گاؤں والے بھاگ کر آتے مگر شیر نہیں ہوتا۔ ایک دن سچ میں شیر آگیا۔ اس نے مدد کے لیے پکارا مگر کوئی نہ آیا۔ شیر نے بھیڑوں کو کھا لیا۔ وہ رونے لگا۔ سبق: جھوٹ بولنے والا سچ بول کر بھی یقین نہیں دلا سکتا- "
 },
 { 
   title: "نرمی کا اثر", 
-  text: "ایک دن علی کا دوست اس پر ناراض ہو گیا۔ علی نے بدلہ نہیں لیا، بلکہ نرمی سے بات کی۔ دوست شرمندہ ہو گیا۔ اس نے معافی مانگی۔ علی نے کہا، سختی نہیں نرمی دل جیتتی ہے۔ اب وہ دونوں بہترین دوست ہیں- سبق: نرمی میں وہ طاقت ہے جو سختی میں نہیں۔"
+  text: "ایک دن علی کا دوست اس پر ناراض ہو گیا۔ علی نے بدلہ نہیں لیا، بلکہ نرمی سے بات کی۔ دوست شرمندہ ہو گیا۔ اس نے معافی مانگی۔ علی نے کہا، سختی نہیں نرمی دل جیتتی ہے۔ اب وہ دونوں بہترین دوست ہیں۔ سبق: نرمی میں وہ طاقت ہے جو سختی میں نہیں۔"
 },
 { 
   title: "کوشش کرنے والا", 
@@ -668,11 +690,11 @@
 },
 { 
   title: "دوستی کا امتحان", 
-  text: "ریحان اور فہد گہرے دوست تھے۔ ایک دن فہد بیمار ہوا۔ سب دوست چھوڑ گئے مگر ریحان روز اس کے پاس آتا رہا۔ اس نے دوا اور کھانا پہنچایا۔ فہد صحت یاب ہوا تو آنسوؤں سے ریحان کا شکریہ ادا کیا۔ ریحان نے کہا، سچا دوست وہی ہے جو مصیبت میں ساتھ دے۔ سبق: دوستی کا اصل مطلب ساتھ نبھانا ہے، صرف خوشی بانٹنا نہیں۔"
+  text: "ریحان اور فہد گہرے دوست تھے۔ ایک دن فہد بیمار ہوا۔ سب دوست چھوڑ گئے مگر ریحان روز اس کے پاس آتا رہا۔ اس نے دوا اور کھانا پہنچایا- فہد صحت یاب ہوا تو آنسوؤں سے ریحان کا شکریہ ادا کیا۔ ریحان نے کہا، سچا دوست وہی ہے جو مصیبت میں ساتھ دے۔ سبق: دوستی کا اصل مطلب ساتھ نبھانا ہے، صرف خوشی بانٹنا نہیں۔"
 },
 { 
   title: "غرور کا ٹوٹنا", 
-  text: "ایک شہزادہ اپنی دولت پر غرور کرتا تھا۔ وہ غریبوں کو حقیر سمجھتا۔ ایک دن شکاریوں نے اسے جنگل میں اکیلا چھوڑ دیا۔ بھوک سے نڈھال ہو گیا۔ ایک غریب چرواہے نے اسے روٹی دی۔ شہزادہ شرمندہ ہوا۔ اس دن سے اس نے غرور چھوڑ دیا۔ سبق: غرور انسان کو نیچا کر دیتا ہے، عاجزی انسان کو اونچا۔"
+  text: "ایک شہزادہ اپنی دولت پر غرور کرتا تھا۔ وہ غریبوں کو حقیر سمجھتا۔ ایک دن شکاریوں نے اسے جنگل میں اکیلا چھوڑ دیا۔ بھوک سے نڈھال ہو گیا۔ ایک غریب چرواہے نے اسے روٹی کی۔ شہزادہ شرمندہ ہوا۔ اس دن سے اس نے غرور چھوڑ دیا۔ سبق: غرور انسان کو نیچا کر دیتا ہے، عاجزی انسان کو اونچا۔"
 },
 { 
   title: "جھوٹی چالاکی", 
@@ -687,7 +709,7 @@
   text: "ایک دریا نے سمندر سے پوچھا، تم اتنا عظیم کیسے بنے؟ سمندر نے کہا، میں ہر ندی اور چشمے کو قبول کرتا ہوں۔ دریا نے سمجھ لیا، بڑائی دینے میں ہے، لینے میں نہیں۔ سبق: عاجزی سے انسان کی قدر بڑھتی ہے، تکبر سے نہیں۔"
 },
 { 
-  title: "کمِی کا احساس", 
+  title: "کمی کا احساس", 
   text: "ایک امیر بچہ ہر چیز رکھتا تھا مگر خوش نہیں تھا۔ ایک دن وہ ایک غریب بچے سے ملا جو بغیر جوتوں کے کھیل رہا تھا۔ مگر وہ بہت خوش تھا۔ امیر بچے نے پوچھا تم خوش کیسے ہو؟ اس نے کہا، شکر کرنے سے دل خوش رہتا ہے۔ سبق: خوشی چیزوں میں نہیں، شکرگزاری میں ہے۔"
 },
 { 
@@ -764,7 +786,7 @@
 },
 { 
   title: "گھمنڈی مور", 
-  text: "مور اپنے خوبصورت پروں پر ناز کرتا تھا۔ ایک دن بارش میں اس کے پر خراب ہو گئے۔ چڑیا نے کہا، خوبصورتی وقتی ہوتی ہے، اخلاق ہمیشہ رہتا ہے۔ مور شرمندہ ہوا۔ سبق: اصل خوبصورتی کردار میں ہے، ظاهری شکل میں نہیں۔"
+  text: "مور اپنے خوبصورت پروں پر ناز کرتا تھا۔ ایک دن بارش میں اس کے پر خراب ہو گئے۔ چڑیا نے کہا، خوبصورتی وقتی ہوتی ہے، اخلاق ہمیشہ رہتا ہے۔ مور شرمندہ ہوا۔ سبق: اصل خوبصورتی کردار میں ہے، ظاہری شکل میں نہیں۔"
 },
 { 
   title: "جھاڑو والا لڑکا", 
@@ -772,7 +794,7 @@
 },
 { 
   title: "دو روپے کی مدد", 
-  text: "ایک غریب عورت کے پاس صرف دو روپے تھے۔ اس نے بھوکے بچے کو دے دیے۔ شام کو اسے دگنی رقم تحفے میں ملی۔ اس نے کہا، نیکی دوگنی ہو کر لوٹتی ہے۔ سبق: جو بانٹتا ہے وہ کبھی خالی نہیں رہتا-"
+  text: "ایک غریب عورت کے پاس صرف دو روپے تھے۔ اس نے بھوکے بچے کو دے دیے۔ شام کو اسے دگنی رقم تحفے میں ملی۔ اس نے کہا، نیکی دوگنی ہو کر لوٹتی ہے۔ سبق: جو بانٹتا ہے وہ کبھی خالی نہیں رہتا۔"
 },
 { 
   title: "ہنسی کا تحفہ", 
@@ -788,7 +810,7 @@
 },
 { 
   title: "پھٹے جوتے والا لڑکا", 
-  text: "ایک بچے کے جوتے پھٹ گئے، مگر وہ خوشی سے کھیلتا رہا- ایک امیر بچہ یہ دیکھ کر حیران ہوا۔ اس نے کہا، میں نئے جوتے ہوتے ہوئے بھی خوش نہیں۔ سبق: خوشی چیزوں سے نہیں، دل کے سکون سے ہوتی ہے۔"
+  text: "ایک بچے کے جوتے پھٹ گئے، مگر وہ خوشی سے کھیلتا رہا۔ ایک امیر بچہ یہ دیکھ کر حیران ہوا۔ اس نے کہا، میں نئے جوتے ہوتے ہوئے بھی خوش نہیں۔ سبق: خوشی چیزوں سے نہیں، دل کے سکون سے ہوتی ہے۔"
 },
 { 
   title: "کتاب اور موبائل", 
@@ -800,7 +822,7 @@
 },
 { 
   title: "اندھی محبت", 
-  text: "ایک کسان اپنی گائے سے بہت محبت کرتا تھا۔ ایک دن وہ بیمار ہو گئی۔ کسان نے دن رات خدمت کی۔ گائے ٹھیک ہو گئی۔ اس نے جان لیا، محبت الفاظ سے نہیں، عمل سے ظاہر ہوتی ہے۔ سبق: خلوص دل سے کیا گیا پیار کبھی ضائع نہیں جاتا۔"
+  text: "ایک کسان اپنی گائے سے بہت محبت کرتا تھا۔ ایک دن وہ بیمار ہو گئی۔ کسان نے دن رات خدمت کی۔ گائے ٹھیک ہو گئی۔ اس نے جان لیا، محبت الفاظ سے نہیں، عمل سے ظاہر ہوتی ہے۔ سبق: خلوص دل سے کیا گیا پیار کبھی ضائع نہیں جاتا- "
 },
 { 
   title: "نقلی دوست", 
@@ -812,7 +834,7 @@
 },
 { 
   title: "نیکی کا پھل", 
-  text: "ایک لڑکی نے سردی میں ایک بلی کو کمبل دیا۔ کچھ دن بعد وہی بلی اس کے گھر کے چور پر جھپٹ پڑی۔ لڑکی نے کہا، نیکی کبھی بیکار نہیں جاتی۔ سبق: اللہ نیکی کا بدلہ ضرور دیتا ہے۔"
+  text: "ایک لڑکی نے سردی میں ایک بلی کو کمبل دیا۔ کچھ دن بعد وہی بلی اس کے گھر کے چور پر جھپٹ پڑی۔ لڑکی نے کہا، نیکی کبھی بیکار نہیں جاتی- سبق: اللہ نیکی کا بدلہ ضرور دیتا ہے۔"
 },
 { 
   title: "پانی کا گلاس", 
@@ -848,7 +870,7 @@
 },
 { 
   title: "بردباری کا صلہ", 
-  text: "ایک لڑکے نے بازار میں کسی کے ساتھ بدتمیزی کی۔ دوسرا شخص خاموش رہا۔ لوگ حیران ہوئے۔ لڑکے کو بعد میں شرمندگی ہوئی اور اس نے معافی مانگی۔ خاموش شخص نے مسکرا کر کہا، غصہ کمزوروں کا ہتھیار ہے، صبر بہادروں کا۔ سبق: غصہ برداشت سے ختم ہوتا ہے، بدلہ لینے سے نہیں۔"
+  text: "ایک لڑکے نے بازار میں کسی کے ساتھ بدتمیزی کی۔ دوسرا شخص خاموش رہا۔ لوگ حیران ہوئے۔ لڑکے کو بعد میں شرمندگی ہوئی اور اس نے معافی مانگی۔ خاموش شخص نے مسکرا کر کہا، غصہ کمزوروں کا ہتھیار ہے، صبر بہادروں کا- سبق: غصہ برداشت سے ختم ہوتا ہے، بدلہ لینے سے نہیں۔"
 },
 { 
   title: "عقلمند بیٹا", 
@@ -885,11 +907,11 @@
 },
 { 
   title: "غلطی کا احساس", 
-  text: "ایک لڑکی نے اپنی دوست سے تلخ بات کہی۔ دوست رو کر چلی گئی۔ رات کو لڑکی کو احساس ہوا کہ وہ غلط تھی۔ اگلے دن اس نے جا کر معافی مانگی۔ دوست نے اسے گلے لگا لیا- دونوں کی دوستی پہلے سے مضبوط ہو گئی۔ سبق: اپنی غلطی مان لینا کمزوری نہیں بلکہ بہادری ہے۔"
+  text: "ایک لڑکی نے اپنی دوست سے تلخ بات کہی۔ دوست رو کر چلی گئی۔ رات کو لڑکی کو احساس ہوا کہ وہ غلط تھی۔ اگلے دن اس نے جا کر معافی مانگی۔ دوست نے اسے گلے لگا لیا۔ دونوں کی دوستی پہلے سے مضبوط ہو گئی۔ سبق: اپنی غلطی مان لینا کمزوری نہیں بلکہ بہادری ہے۔"
 },
 { 
   title: "خواب دیکھنے والا", 
-  text: "عاصم ایک غریب لڑکا تھا مگر خواب بڑے دیکھتا تھا۔ سب کہتے تھے کہ وہ کچھ نہیں کر سکتا۔ مگر اس نے یقین نہیں چھوڑا۔ دن رات پڑھتا رہا۔ آخرکار وہ ایک سائنسدان بن گیا۔ اس نے کہا، خواب دیکھنا آسان ہے مگر ان کے لیے محنت کرنا اصل ہمت ہے۔ سبق: خواب وہی سچے ہوتے ہیں جن کے لیے جاگ کر محنت کی جائے۔"
+  text: "عاصم ایک غریب لڑکا تھا مگر خواب بڑے دیکھتا تھا۔ سب کہتے تھے کہ وہ کچھ نہیں کر سکتا۔ مگر اس نے یقین نہیں چھوڑا۔ دن رات پڑھتا رہا۔ آخرکار وہ ایک سائنسدان بن گیا۔ اس نے کہا، خواب دیکھنا آسان ہے مگر ان کے لیے محنت کرنا اصل ہمت ہے۔ سبق: خواب وہی سچے ہوتے ہیں جنہیں محنت سے سجایا جائے۔"
 },
 { 
   title: "محبت کا درخت", 
@@ -897,7 +919,7 @@
 },
 { 
   title: "برداشت کی طاقت", 
-  text: "ایک لڑکی پر دوست نے الزام لگایا۔ سب نے باتیں بنائیں مگر اس نے خاموشی اختیار کی۔ وقت نے سچ دکھا دیا۔ سب نے اس سے معافی مانگی۔ اس نے کہا، میں نے اللہ پر بھروسہ رکھا۔ لوگوں نے سیکھا کہ خاموشی بھی بڑی طاقت ہے۔ سبق: ہر بات کا جواب دینا ضروری نہیں، کبھی صبر ہی سب سے بہتر جواب ہوتا ہے۔"
+  text: "ایک لڑکی پر دوست نے الزام لگایا۔ سب نے باتیں بنائیں مگر اس نے خاموشی اختیار کی۔ وقت نے سچ دکھا دیا۔ سب نے اس سے معافی مانگی- اس نے کہا، میں نے اللہ پر بھروسہ رکھا۔ لوگوں نے سیکھا کہ خاموشی بھی بڑی طاقت ہے۔ سبق: ہر بات کا جواب دینا ضروری نہیں، کبھی صبر ہی سب سے بہتر جواب ہوتا ہے۔"
 },
               
               {
